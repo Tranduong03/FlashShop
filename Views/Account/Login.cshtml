@@ -1,0 +1,58 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@model FlashShop.Models.AccountCheck;
+
+<link href="~/css/login.css" rel="stylesheet" />
+
+<form asp-action="Login" method="post" class="form-container">
+    <div class="form-group">
+        <label asp-for="Account" class="form-label"></label>
+        <input asp-for="Account" class="form-input" />
+        <span asp-validation-for="Account" class="form-validation"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password" class="form-label"></label>
+        <input asp-for="Password" type="password" id="passwordField" class="form-input" />
+        <span asp-validation-for="Password" class="form-validation"></span>
+    </div>
+
+    <!-- Checkbox để hiển thị mật khẩu -->
+    <div class="form-group">
+        <input type="checkbox" id="showPassword" class="form-checkbox" onclick="togglePasswordVisibility()" />
+        <label for="showPassword" class="form-checkbox-label">Show Password</label>
+    </div>
+
+    <button type="submit" class="btn-submit">Login</button>
+
+    <!-- Liên kết Quên mật khẩu và Đăng kí tài khoản -->
+    <div class="form-links">
+        <a asp-action="ForgotPassword" class="link">Forgot Password?</a>
+    </div>
+    <div class="form-links">
+        Don't have an account? <a asp-action="Register" class="link">Register here</a>
+    </div>
+</form>
+
+<script>
+    function togglePasswordVisibility() {
+        var passwordField = document.getElementById("passwordField");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
+    }
+</script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
