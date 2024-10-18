@@ -1,3 +1,4 @@
+using FlashShop.OtherProcessing;
 using FlashShop.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,7 @@ var connectionString = builder.Configuration["ConnectionStrings:ConnectedDb"];
 Console.WriteLine(connectionString);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<EmailService>();
 
 var app = builder.Build();
 

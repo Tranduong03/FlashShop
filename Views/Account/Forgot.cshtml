@@ -1,0 +1,13 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<link href="~/css/login.css" rel="stylesheet" />
+
+<form asp-action="Forgot" class="form-container" method="post">
+    <h3 class="form-title">Forgot Account</h3>
+    <div class="form-group">
+        <input type="email" name="email" class="form-input" placeholder="Write your email here!" />
+    </div>
+    <button type="submit" class="btn-submit" id="btnSend">Send</button>    
+</form>
