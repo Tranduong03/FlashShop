@@ -38,19 +38,23 @@ body {
     text-transform: uppercase;
 }
 .text-1 {
-    color: #e5660b; 
+    color: #260000; 
     font-weight: 900;
+    margin-top: 5px;
 }
 .text-2 {
     color: white;
     font-weight: 900;
+    margin-top: 5px;
 }
 
 .input-group {
     position: relative;
+    margin-left: 20px;
 }
     .input-group .form-control {
         padding-right: 40px;
+        
     }
     .input-group .input-group-text {
         position: absolute;
@@ -75,12 +79,13 @@ body {
 * */
 
 .nav-link {
-    color: GrayText !important;
+    color:black !important;
+    font-weight: bold;
     text-decoration: none;
 }
 
 .nav-link:hover {
-    color: black !important;   
+    color:white!important;   
     font-weight: bold;
     font-size: 15px;
 }   
@@ -97,6 +102,7 @@ body {
 
 .container {
     flex: 1;
+ 
 }
 
 footer {
@@ -104,7 +110,9 @@ footer {
     padding-top: 1rem;
     padding-bottom: 0.5rem;
 }
-
+footer .row{
+    margin-right: 150px;
+}
 footer .py-5 {
     padding-top: 1rem !important;
     padding-bottom: 1rem !important;

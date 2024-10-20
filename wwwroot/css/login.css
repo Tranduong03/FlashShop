@@ -2,6 +2,7 @@
 .form-container {
     max-width: 400px;
     margin: 0 auto;
+    margin-top: 150px !important;
     padding: 20px;
     background-color: #f7f7f7;
     border-radius: 10px;
