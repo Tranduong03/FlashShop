@@ -22,7 +22,6 @@ namespace FlashShop.Controllers
 		[HttpGet]
 		public IActionResult Login()
 		{
-
 			Console.WriteLine("LoginPage");
 			return View(new AccountCheck());
 		}
@@ -47,13 +46,13 @@ namespace FlashShop.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Register(Customer customer)
+		public async Task<IActionResult> Register(Users customer)
 		{
 			if (ModelState.IsValid)
 			{
 				// Kiểm tra nếu tài khoản đã tồn tại
-				var existingAccount = await _context.Customer
-					.FirstOrDefaultAsync(c => c.Account == customer.Account);
+				var existingAccount = await _context.Users
+					.FirstOrDefaultAsync(c => c.account == customer.account);
 
 				if (existingAccount != null)
 				{
@@ -62,7 +61,7 @@ namespace FlashShop.Controllers
 				}
 
 				// Lưu thông tin người dùng mới vào CSDL
-				_context.Customer.Add(customer);
+				_context.Users.Add(customer);
 				await _context.SaveChangesAsync();
 
 				// Chuyển hướng tới trang khác sau khi đăng ký thành công
@@ -80,13 +79,13 @@ namespace FlashShop.Controllers
 			if (ModelState.IsValid)
 			{
 				// Tìm tài khoản trong cơ sở dữ liệu
-				var user = await _context.Customer
-					.FirstOrDefaultAsync(c => c.Account == checkAcc.Account && c.Password == checkAcc.Password);
+				var user = await _context.Users	
+					.FirstOrDefaultAsync(c => c.account == checkAcc.account && c.password == checkAcc.password);
 
 				if (user != null)
 				{
 					// Đăng nhập thành công, chuyển hướng đến trang chính
-					TempData["SuccessMessage"] = $"Đăng nhập thành công với tài khoản {user.Account}.";
+					TempData["SuccessMessage"] = $"Đăng nhập thành công với tài khoản {user.account}.";
                     Console.WriteLine("Login Success");
                     return RedirectToAction("Index", "Home");
 				}
@@ -121,7 +120,7 @@ namespace FlashShop.Controllers
 				return View();
 			}
 
-			var emailvalid = await _context.Customer.FirstOrDefaultAsync(c => c.Email == email);
+			var emailvalid = await _context.Users.FirstOrDefaultAsync(c => c.email == email);
 
 			if (emailvalid != null)
             {
@@ -129,8 +128,8 @@ namespace FlashShop.Controllers
                 TempData["OTP"] = SaveOTP;
 				TempData["Email"] = email;// Store OTP in TempData (or session/database)
 				var emailService = new EmailService(_configuration);  // Inject email service
-				await emailService.SendEmailAsync(emailvalid.Email, "Your OTP Code", $"Your OTP is: {SaveOTP}");
-				TempData["SuccessMessage"] = $"Đã gửi OTP về Email {emailvalid.Email}";
+				await emailService.SendEmailAsync(emailvalid.email, "Your OTP Code", $"Your OTP is: {SaveOTP}");
+				TempData["SuccessMessage"] = $"Đã gửi OTP về Email {emailvalid.email}";
 
 				return RedirectToAction("InputOTP");
 			}
@@ -184,11 +183,11 @@ namespace FlashShop.Controllers
             }
 
             // Tìm tài khoản dựa trên email đã lưu
-            var customer = await _context.Customer.FirstOrDefaultAsync(c => c.Email == email);
+            var customer = await _context.Users.FirstOrDefaultAsync(c => c.email == email);
             if (customer != null)
             {
                 // Cập nhật mật khẩu mới cho người dùng
-                customer.Password = newPassword; 
+                customer.password = newPassword; 
                 await _context.SaveChangesAsync();
 
                 TempData["SuccessMessage"] = "Your password has been reset successfully!";
