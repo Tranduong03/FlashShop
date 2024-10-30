@@ -1,0 +1,20 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<link href="~/css/login.css" rel="stylesheet" />
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+<form asp-action="InputOTP" method="post">
+    <div class="form-group">
+        <label class="form-label">Input OTP</label>
+        <input type="text" class="form-input" name="otp" />
+    </div>
+    <button type="submit" class="btn-submit" name="action" value="submitOTP" id="btnSubmitOTP">Submit OTP</button>
+</form>

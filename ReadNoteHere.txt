@@ -8,3 +8,6 @@ Microsoft.EntityFrameworkCore
 Microsoft.EntityFrameworkCore.Design
 Microsoft.EntityFrameworkCore.Tools
 Microsoft.EntityFrameworkCore.SqlServer
+
+--- 18/10/2024 ---
+Trường lấy lại mật khẩu được thêm vào

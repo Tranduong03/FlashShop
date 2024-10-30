@@ -22,6 +22,7 @@ namespace FlashShop.Controllers
         {
             return View();
         }
+
         public IActionResult Privacy()
         {
             return View();
