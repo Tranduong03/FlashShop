@@ -49,7 +49,7 @@
     text-align: center;
 }
     .account p, .shopping-cart p {
-        margin: 0; 
+        margin: 0; 0
         color: black; 
         font-weight: 550;
     }
