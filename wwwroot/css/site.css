@@ -25,15 +25,50 @@ body {
 * CSS by Trần Nguyễn Phi Dương
 * Đây là phần css của nav-brand
 * */
-
+                border-radius: 5px; /* Bo tròn góc khi hover */
 .navbar-brand .logo-img {
     width: 35px;
     height: 35px;
     object-fit: cover; 
-}
-
+/* CSS cho container2 */
+    margin: 0; /* Loại bỏ khoảng cách mặc định */
 .brand-logo {
     font-family: 'Arial', sans-serif; 
+    font-size: 35px;
+    text-transform: uppercase;
+}
+
+    /* Style for the li elements */
+    .navbar2 li {
+        margin-right: 20px; /* Khoảng cách giữa các mục */
+    }
+
+        /* Style for the links */
+        .navbar2 li a {
+            text-decoration: none; /* Bỏ dấu gạch chân */
+            font-weight: bold; /* Chữ in đậm */
+            color: black; /* Màu đen cho chữ */
+            font-size: 16px; /* Điều chỉnh kích thước chữ */
+            padding: 10px 15px; /* Thêm khoảng cách vào trong liên kết */
+            display: block; /* Đảm bảo toàn bộ vùng liên kết có thể click */
+        }
+
+            /* Hover effect */
+            .navbar2 li a:hover {
+                color: #248958; /* Màu xanh khi hover */
+                background-color: #f0f0f0; /* Màu nền khi hover */
+                border-radius: 5px; /* Bo tròn góc khi hover */
+            }
+
+
+.d-flex me-3 .form-control {
+    width:650px;
+}
+.nav-group-icon {
+    display: flex;
+    gap: 60px; /* Khoảng cách giữa các phần tử */
+.carousel slide {
+    margin-top: 60px;
     font-size: 35px;
     text-transform: uppercase;
 }
@@ -56,41 +91,6 @@ body {
         position: absolute;
         right: 10px;
         top: 50%;
-        transform: translateY(-50%);
-        background: transparent;
-        border: none;
-    }
-    .input-group .bi-search {
-        font-size: 1rem;
-    }
-
-
-/*
-    End nav-brand
-*/
-
-/*
-* CSS by Trần Nguyễn Phi Dương
-* Đây là phần css của footer
-* */
-
-.nav-link {
-    color: GrayText !important;
-    text-decoration: none;
-}
-
-.nav-link:hover {
-    color: black !important;   
-    font-weight: bold;
-    font-size: 15px;
-}   
-
-html, body {
-    height: 100%;
-}
-
-body {
-    display: flex;
     flex-direction: column;
     margin: 0;
 }
@@ -127,3 +127,38 @@ footer .my-4 {
     End Footer
 */
     
+    .footer-section p {
+        margin: 5px 0;
+        font-size: 14px;
+    }
+
+    .footer-section strong {
+        color: #ff4500;
+    }
+
+    .footer-section ul {
+        list-style: none;
+        padding: 0;
+    }
+
+        .footer-section ul li {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+.social-icons a {
+    display: inline-block;
+    color: #fff;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.footer-bottom {
+    background-color: #248958;
+    color:black;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+
