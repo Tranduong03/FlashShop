@@ -17,148 +17,187 @@ html {
     min-height: 100%;
 }
 
-body {
-    margin-bottom: 60px;
-}
 
-/* 
-* CSS by Trần Nguyễn Phi Dương
-* Đây là phần css của nav-brand
-* */
-                border-radius: 5px; /* Bo tròn góc khi hover */
-.navbar-brand .logo-img {
-    width: 35px;
-    height: 35px;
-    object-fit: cover; 
-/* CSS cho container2 */
-    margin: 0; /* Loại bỏ khoảng cách mặc định */
-.brand-logo {
-    font-family: 'Arial', sans-serif; 
-    font-size: 35px;
-    text-transform: uppercase;
-}
-
-    /* Style for the li elements */
-    .navbar2 li {
-        margin-right: 20px; /* Khoảng cách giữa các mục */
-    }
-
-        /* Style for the links */
-        .navbar2 li a {
-            text-decoration: none; /* Bỏ dấu gạch chân */
-            font-weight: bold; /* Chữ in đậm */
-            color: black; /* Màu đen cho chữ */
-            font-size: 16px; /* Điều chỉnh kích thước chữ */
-            padding: 10px 15px; /* Thêm khoảng cách vào trong liên kết */
-            display: block; /* Đảm bảo toàn bộ vùng liên kết có thể click */
-        }
-
-            /* Hover effect */
-            .navbar2 li a:hover {
-                color: #248958; /* Màu xanh khi hover */
-                background-color: #f0f0f0; /* Màu nền khi hover */
-                border-radius: 5px; /* Bo tròn góc khi hover */
-            }
-
-
-.d-flex me-3 .form-control {
-    width:650px;
-}
-.nav-group-icon {
-    display: flex;
-    gap: 60px; /* Khoảng cách giữa các phần tử */
-.carousel slide {
-    margin-top: 60px;
-    font-size: 35px;
-    text-transform: uppercase;
-}
-.text-1 {
-    color: #e5660b; 
-    font-weight: 900;
-}
-.text-2 {
-    color: white;
-    font-weight: 900;
-}
-
-.input-group {
-    position: relative;
-}
-    .input-group .form-control {
-        padding-right: 40px;
-    }
-    .input-group .input-group-text {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-    flex-direction: column;
-    margin: 0;
-}
-
-.container {
-    flex: 1;
-}
-
-footer {
-    margin-top: auto;
-    padding-top: 1rem;
-    padding-bottom: 0.5rem;
-}
-
-footer .py-5 {
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
-}
-
-footer .my-4 {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-}
-
-.bi {
-    color: black;
-    font-size: 28px;
-}
-
-.bi:hover {
-    color: black; 
-}
 /*
-    End Footer
+    css cho trang home
 */
-    
-    .footer-section p {
-        margin: 5px 0;
-        font-size: 14px;
-    }
 
-    .footer-section strong {
-        color: #ff4500;
-    }
+.carousel-item img {
+    height: 300px;
+}
 
-    .footer-section ul {
+span {
+    font-weight: bold;
+}
+
+.center-text {
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin-top: 20px;
+    text-align: center;
+    color: #A0D6B4;
+}
+
+.info {
+    color: #A0D6B4;
+}
+
+.row {
+    margin-right: -10px;
+    margin-left: -10px;
+    margin-top: 15px;
+}
+
+.section_services .promo-box .promo-item {
+    text-align: center;
+    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    min-height: 85px;
+    padding-top: 7px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+}
+
+.book-section {
+    margin-top: 15px;
+}
+
+/* Định dạng menu */
+.book-menu {
+    font-weight: bold;
+}
+
+    .book-menu ul {
         list-style: none;
         padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: space-around;
+        background-color: #A0D6B4;
     }
 
-        .footer-section ul li {
-            font-size: 14px;
-            margin: 5px 0;
+        .book-menu ul li {
+            padding: 10px;
         }
 
-.social-icons a {
-    display: inline-block;
-    color: #fff;
-    font-size: 20px;
-    margin-right: 10px;
+            .book-menu ul li a {
+                color: white;
+                text-decoration: none;
+            }
+
+                .book-menu ul li a:hover {
+                    color: #ddd;
+                }
+
+.carousel-item .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+    margin-top: 20px;
 }
 
-.footer-bottom {
-    background-color: #248958;
-    color:black;
+/* Định dạng phần danh sách sách */
+.book-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+/* Định dạng từng sách (book-item) */
+.book-item {
+    width: 200px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     text-align: center;
-    padding: 10px 0;
-    font-size: 14px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+    .book-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
 
+    .book-item h3 {
+        font-size: 1.1em;
+        margin: 10px 0;
+    }
+
+    .book-item p {
+        margin: 5px 0;
+        font-size: 0.9em;
+    }
+
+    /* Ẩn các sách không thuộc loại đã chọn */
+    .book-item.hidden {
+        display: none;
+    }
+
+/* Tạo layout flexbox cho banner */
+.banner-container {
+    display: flex;
+    justify-content: space-around; /* Căn đều các banner */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Định dạng cho từng banner */
+.banner {
+    width: 30%; /* Kích thước mỗi banner là 30% chiều rộng của khung chứa */
+    height: 100px;
+    overflow: hidden;
+    border-radius: 8px; /* Tùy chọn làm bo góc banner */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+}
+
+    .banner img {
+        object-fit: cover;
+    }
+
+/* Container chứa toàn bộ các tin tức */
+.news-container {
+    display: flex;
+    justify-content: space-around; /* Căn đều các phần tử */
+    gap: 20px; /* Khoảng cách giữa các phần tử */
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Mỗi tin tức */
+.news-item {
+    position: relative;
+    width: 23%; /* Chiếm 1/4 chiều rộng của container */
+    overflow: hidden;
+    border-radius: 8px; /* Bo góc cho hình ảnh */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+}
+
+    /* Ảnh của mỗi tin tức */
+    .news-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+/* Nội dung tin tức nằm đè lên hình ảnh */
+.news-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 25%; /* Đè lên 1/4 chiều cao của ảnh */
+    background-color: rgba(0, 0, 0, 0.6); /* Nền đen mờ */
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
