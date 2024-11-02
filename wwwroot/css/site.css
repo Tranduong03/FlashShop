@@ -153,11 +153,11 @@ span {
     align-items: center; /* Căn giữa theo chiều dọc */
     margin-top: 20px;
     text-align: center;
-    color: #A0D6B4;
+    color: #289F66;
 }
 
 .info {
-    color: #A0D6B4;
+    color: #289F66;
 }
 
 .row {
@@ -185,14 +185,14 @@ span {
     font-weight: bold;
 }
 
-.book-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: space-around;
-    background-color: #A0D6B4;
-}
+    .book-menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: space-around;
+        background-color: #289F66;
+    }
 
     .book-menu ul li {
         padding: 10px;
