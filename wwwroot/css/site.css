@@ -21,10 +21,17 @@ html {
 /*
     css cho trang home
 */
+.carousel-inner {
+    width: 100%; /* Chiều rộng toàn màn hình */
+    
+}
 
 .carousel-item img {
-    height: 300px;
+    width: 100%;
+    height: 400px;
 }
+
+
 
 span {
     font-weight: bold;
