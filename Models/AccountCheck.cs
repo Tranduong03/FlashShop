@@ -4,23 +4,23 @@ namespace FlashShop.Models
 {
     public class AccountCheck
     {
-        public AccountCheck()
-        {
-        }
-
-        public AccountCheck(string account, string password)
-        {
-            Account = account;
-            Password = password;
-        }
-
-        [Required]
-        public string Account { get; set; }
+        [Required] 
+        public string account { get; set; }
 
         [Required]
         [StringLength(20)]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string password { get; set; }
 
+        /*
+         * Method for login (account and password)
+         * */
+        public AccountCheck() { }
+
+        public AccountCheck(string account, string password)
+        {
+            this.account = account;
+            this.password = password;
+        }
     }
 }

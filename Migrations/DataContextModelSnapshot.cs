@@ -21,37 +21,37 @@ namespace FlashShop.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("FlashShop.Models.Customer", b =>
+            modelBuilder.Entity("FlashShop.Models.Users", b =>
                 {
-                    b.Property<int>("CustomerID")
+                    b.Property<int>("userID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("userID"));
 
-                    b.Property<string>("Account")
+                    b.Property<string>("account")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CustomerName")
+                    b.Property<string>("email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
+                    b.Property<string>("password")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<bool>("TypeUser")
+                    b.Property<bool>("typeUser")
                         .HasColumnType("bit");
 
-                    b.HasKey("CustomerID");
+                    b.Property<string>("userName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Customer");
+                    b.HasKey("userID");
+
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }

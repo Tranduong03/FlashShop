@@ -17,124 +17,7 @@ html {
     min-height: 100%;
 }
 
-body {
-    margin-bottom: 60px;
-}
 
-/* 
-* CSS by Trần Nguyễn Phi Dương
-* Đây là phần css của nav-brand
-* */
-
-.navbar-brand .logo-img {
-    width: 35px;
-    height: 35px;
-    object-fit: cover; 
-}
-
-.brand-logo {
-    font-family: 'Arial', sans-serif; 
-    font-size: 35px;
-    text-transform: uppercase;
-}
-.text-1 {
-    color: #260000; 
-    font-weight: 900;
-    margin-top: 5px;
-}
-.text-2 {
-    color: white;
-    font-weight: 900;
-    margin-top: 5px;
-}
-
-.input-group {
-    position: relative;
-    margin-left: 20px;
-}
-    .input-group .form-control {
-        padding-right: 40px;
-        
-    }
-    .input-group .input-group-text {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        background: transparent;
-        border: none;
-    }
-    .input-group .bi-search {
-        font-size: 1rem;
-    }
-
-
-/*
-    End nav-brand
-*/
-
-/*
-* CSS by Trần Nguyễn Phi Dương
-* Đây là phần css của footer
-* */
-
-.nav-link {
-    color:black !important;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.nav-link:hover {
-    color:white!important;   
-    font-weight: bold;
-    font-size: 15px;
-}   
-
-html, body {
-    height: 100%;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-}
-
-.container {
-    flex: 1;
- 
-}
-
-footer {
-    margin-top: auto;
-    padding-top: 1rem;
-    padding-bottom: 0.5rem;
-}
-footer .row{
-    margin-right: 150px;
-}
-footer .py-5 {
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
-}
-
-footer .my-4 {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-}
-
-.bi {
-    color: black;
-    font-size: 28px;
-}
-
-.bi:hover {
-    color: black; 
-}
-/*
-    End Footer
-*/
-    
 /*
     css cho trang home
 */
@@ -198,14 +81,18 @@ span {
         padding: 10px;
     }
 
-        .book-menu ul li a {
-            color: white;
-            text-decoration: none;
+        .book-menu ul li {
+            padding: 10px;
         }
 
-            .book-menu ul li a:hover {
-                color: #ddd;
+            .book-menu ul li a {
+                color: white;
+                text-decoration: none;
             }
+
+                .book-menu ul li a:hover {
+                    color: #ddd;
+                }
 
 .carousel-item .row {
     display: flex;
@@ -274,9 +161,9 @@ span {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
 }
 
-.banner img {
-    object-fit: cover;
-}
+    .banner img {
+        object-fit: cover;
+    }
 
 /* Container chứa toàn bộ các tin tức */
 .news-container {
@@ -318,4 +205,3 @@ span {
     align-items: center;
     text-align: center;
 }
-

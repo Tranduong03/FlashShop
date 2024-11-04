@@ -9,6 +9,6 @@ namespace FlashShop.Repository
         {
 
         }
-        public DbSet<Customer> Customer { get; set; }
+        public DbSet<Users> Users { get; set; }
     }
 }
