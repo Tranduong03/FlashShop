@@ -153,11 +153,11 @@ span {
     align-items: center; /* Căn giữa theo chiều dọc */
     margin-top: 20px;
     text-align: center;
-    color: #289F66;
+    color: #A0D6B4;
 }
 
 .info {
-    color: #289F66;
+    color: #A0D6B4;
 }
 
 .row {
@@ -191,7 +191,7 @@ span {
         margin: 0;
         display: flex;
         justify-content: space-around;
-        background-color: #289F66;
+        background-color: #A0D6B4;
     }
 
     .book-menu ul li {
