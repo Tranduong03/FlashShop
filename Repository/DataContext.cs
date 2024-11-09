@@ -1,5 +1,6 @@
 ﻿using FlashShop.Models;
 using Microsoft.EntityFrameworkCore;
+//using System.Data.Entity;
 
 namespace FlashShop.Repository
 {
@@ -9,6 +10,14 @@ namespace FlashShop.Repository
         {
 
         }
+        public DataContext()
+        {
+
+        }
+
         public DbSet<Users> Users { get; set; }
+        public DbSet<CategoryModel> Categories { get; set; }
+        public DbSet<BookModel> Books { get; set; }
+        public DbSet<PublisherModel> Publishers { get; set; }
     }
 }

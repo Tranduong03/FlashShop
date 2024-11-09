@@ -1,8 +1,56 @@
-﻿@{
-    ViewData["Title"] = "Chào mừng đến với";
+﻿@model List<FlashShop.Models.CategoryModel>
+
+@{
+    ViewData["Title"] = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to my Web</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+    <!-- Indicators (dots at the bottom) -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+
+    <!-- Carousel items (slides) -->
+    <div class="carousel-inner" style="width:100%">
+        <div class="carousel-item active" data-bs-interval="2000">
+            <img src="~/images/Home-images/banner1.png" class="d-block w-100" alt="Banner 1">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+            <img src="~/images/Home-images/banner2.png" class="d-block w-100" alt="Banner 2">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+            <img src="~/images/Home-images/banner6.jpg" class="d-block w-100" alt="Banner 3">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+            <img src="~/images/Home-images/banner4.jpg" class="d-block w-100" alt="Banner 4">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+            <img src="~/images/Home-images/banner5.jpg" class="d-block w-100" alt="Banner 6">
+        </div>
+    </div>
+
+    <!-- Navigation buttons (previous & next) -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<div class="sidebar">
+    <p class="lead"> CHU DE SACH</p>
+    <div class="list-group">
+        @foreach (var item in Model)
+        {
+            <a href="@Url.Action("SPTheochude", "Home", new { id = item.CategoryId})" class="list-group-item">
+                @item.
+            </a>
+        }
+    </div>
 </div>

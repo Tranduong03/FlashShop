@@ -1,12 +1,15 @@
 using System.Diagnostics;
 using FlashShop.Models;
+using FlashShop.Repository;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace FlashShop.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly DataContext _dbContext;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -20,6 +23,8 @@ namespace FlashShop.Controllers
 
         public IActionResult Index()
         {
+            //List<CategoryModel> categories = _dbContext.Categories.ToList();
+
             return View();
         }
 
