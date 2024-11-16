@@ -1,9 +1,7 @@
-﻿@model List<FlashShop.Models.CategoryModel>
-
-@{
-    ViewData["Title"] = "";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿ @{
+     // ViewData["Title"] = "";
+     // Layout = "~/Views/Shared/_Layout.cshtml";
+ }
 
 <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
     <!-- Indicators (dots at the bottom) -->
@@ -43,14 +41,7 @@
     </button>
 </div>
 
-<div class="sidebar">
-    <p class="lead"> CHU DE SACH</p>
-    <div class="list-group">
-        @foreach (var item in Model)
-        {
-            <a href="@Url.Action("SPTheochude", "Home", new { id = item.CategoryId})" class="list-group-item">
-                @item.
-            </a>
-        }
-    </div>
-</div>
+
+
+@await Html.PartialAsync("SidebarPartials")
+

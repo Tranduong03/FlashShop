@@ -10,23 +10,44 @@ namespace FlashShop.Repository
             _context.Database.Migrate();
 
             // Thêm thể loại và nhà xuất bản nếu chưa tồn tại
-            if (!_context.Categories.Any(c => c.CategoryName == "Truyện tranh"))
+            if (!_context.Categories.Any())
             {
-                var theloai = new CategoryModel { CategoryName = "Truyện tranh" };
-                _context.Categories.Add(theloai);
+                var categories = new List<CategoryModel>
+                {
+                    new CategoryModel { CategoryName = "Sách thiếu nhi" },
+                    new CategoryModel { CategoryName = "Truyện tranh" },
+                    new CategoryModel { CategoryName = "Sách tâm lý - tình cảm" },
+                    new CategoryModel { CategoryName = "Sách văn hóa-xã hội" },
+                    new CategoryModel { CategoryName = "Sách hướng dẫn" },
+                    new CategoryModel { CategoryName = "Sách khoa học - viễn tưởng" },
+                    new CategoryModel { CategoryName = "Sách lịch sử" },
+                    new CategoryModel { CategoryName = "Sách giáo khoa" },
+                    new CategoryModel { CategoryName = "Khác" }
+                };
+
+                _context.Categories.AddRange(categories);
                 _context.SaveChanges();
             }
 
-            if (!_context.Publishers.Any(p => p.PublisherName == "Kim Đồng"))
+            if (!_context.Publishers.Any())
             {
-                var nxb = new PublisherModel { PublisherName = "Kim Đồng" };
+                var nxb = new PublisherModel { PublisherName = "Khác" };
                 _context.Publishers.Add(nxb);
                 _context.SaveChanges();
             }
 
             // Lấy lại thể loại và nhà xuất bản vừa thêm để sử dụng ID
-            var category = _context.Categories.FirstOrDefault(c => c.CategoryName == "Truyện tranh");
-            var publisher = _context.Publishers.FirstOrDefault(p => p.PublisherName == "Kim Đồng");
+            var category = _context.Categories.FirstOrDefault(c => c.CategoryName == "Khác");
+            if (category == null)
+            {
+                throw new InvalidOperationException("Category 'Khác' was not found.");
+            }
+
+            var publisher = _context.Publishers.FirstOrDefault(p => p.PublisherName == "Khác");
+            if (publisher == null)
+            {
+                throw new InvalidOperationException("Publisher 'Khác' was not found.");
+            }
 
             // Thêm sách mới nếu chưa có
             if (!_context.Books.Any(b => b.Title == "Conan tập 1"))
