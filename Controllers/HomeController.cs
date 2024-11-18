@@ -9,11 +9,12 @@ namespace FlashShop.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly DataContext _dbContext;
+        private readonly DataContext _dataContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, DataContext context)
         {
             _logger = logger;
+            _dataContext = context;
         }
 
         public IActionResult Home()
@@ -23,9 +24,8 @@ namespace FlashShop.Controllers
 
         public IActionResult Index()
         {
-            //List<CategoryModel> categories = _dbContext.Categories.ToList();
-
-            return View();
+            var products = _dataContext.Books.ToList();
+            return View(products);
         }
 
         public IActionResult Privacy()
