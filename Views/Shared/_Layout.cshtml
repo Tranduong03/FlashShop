@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] | FlashShop</title>
+    <title>@ViewData["Title"] FlashShop</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link href="~/css/site.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/FlashShop.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/FlashShop.styles.css" asp-append-version="true" />
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
@@ -18,7 +18,7 @@
                 <div class="logo">
                     <a href="@Url.Action("Home","Home")" class="text-decoration-none d-flex align-items-center">
                         <img src="~/images/faviconx3.png" alt="Logo Flash Shop" class="logo-img" style="width:50px; height:50px;" />
-                        <span class="ms-2">Flashshop</span>
+                        <span class="text-uppercase ms-2">Flashshop</span>
                     </a>
                 </div>
                 <div class="hotline text-center">
@@ -53,14 +53,36 @@
 
             <div class="nav-container">
                 <ul class="navbar-con">
-                    <li><a href="@Url.Action("Home", "Home")">TRANG CHỦ</a></li>
-                    <li><a href="#">SẢN PHẨM</a></li>
+                    <li><a href="@Url.Action("Home","Home")">TRANG CHỦ</a></li>
+                    <li class="dropdown">
+                        <a href="#">SẢN PHẨM</a>
+                        <div class="dropdown-container">
+                            <ul class="dropdown-menu">
+                                <li><a href="#">AAA</a></li>
+                                <li><a href="#">BBB</a></li>
+                                <li><a href="#">CCC</a></li>
+                                <li><a href="#">DDD</a></li>
+                                <li><a href="#">EEE</a></li>
+                                <li><a href="#">FFF</a></li>
+                            </ul>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">GGG</a></li>
+                                <li><a href="#">HHH</a></li>
+                                <li><a href="#">III</a></li>
+                                <li><a href="#">JJJ</a></li>
+                                <li><a href="#">KKK</a></li>
+                                <li><a href="#">LLL</a></li>
+                            </ul>
+                        </div>
+                    </li>
                     <li><a href="#">KHUYẾN MÃI</a></li>
                     <li><a href="#">TIN TỨC</a></li>
                     <li><a href="@Url.Action("Index", "Home")">GIỚI THIỆU</a></li>
-                    <li><a href="@Url.Action("Index", "Admin")">LIÊN HỆ</a></li>
+                    <li><a href="#">LIÊN HỆ</a></li>
                 </ul>
             </div>
+
+
         </nav>
     </header>
 
@@ -126,13 +148,11 @@
         </div>
     </footer>
 
+    
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="~/js/_Layout.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -84,6 +84,10 @@ span {
         background-color: #A0D6B4;
     }
 
+    .book-menu ul li {
+        padding: 10px;
+    }
+
         .book-menu ul li {
             padding: 10px;
         }
@@ -208,3 +212,33 @@ span {
     align-items: center;
     text-align: center;
 }
+
+
+/*
+    css phần map
+*/
+
+.destination {
+    display: flex;
+}
+
+.location-list {
+    width: 30%;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-right: 1px solid #ddd;
+}
+
+.location-item {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+    .location-item:hover {
+        background-color: #f0f0f0;
+    }
+
+    .map-container {
+        margin-left: 50px;
+    }
