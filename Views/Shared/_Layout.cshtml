@@ -54,13 +54,35 @@
             <div class="nav-container">
                 <ul class="navbar-con">
                     <li><a href="@Url.Action("Home","Home")">TRANG CHỦ</a></li>
-                    <li><a href="#">SẢN PHẨM</a></li>
+                    <li class="dropdown">
+                        <a href="#">SẢN PHẨM</a>
+                        <div class="dropdown-container">
+                            <ul class="dropdown-menu">
+                                <li><a href="#">AAA</a></li>
+                                <li><a href="#">BBB</a></li>
+                                <li><a href="#">CCC</a></li>
+                                <li><a href="#">DDD</a></li>
+                                <li><a href="#">EEE</a></li>
+                                <li><a href="#">FFF</a></li>
+                            </ul>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">GGG</a></li>
+                                <li><a href="#">HHH</a></li>
+                                <li><a href="#">III</a></li>
+                                <li><a href="#">JJJ</a></li>
+                                <li><a href="#">KKK</a></li>
+                                <li><a href="#">LLL</a></li>
+                            </ul>
+                        </div>
+                    </li>
                     <li><a href="#">KHUYẾN MÃI</a></li>
                     <li><a href="#">TIN TỨC</a></li>
                     <li><a href="@Url.Action("Index", "Home")">GIỚI THIỆU</a></li>
                     <li><a href="#">LIÊN HỆ</a></li>
                 </ul>
             </div>
+
+
         </nav>
     </header>
 

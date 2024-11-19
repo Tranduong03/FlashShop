@@ -106,59 +106,111 @@
 /* 
     CSS NAV-CONTAINER 
 */
+/* Đặt chiều cao của navbar và căn giữa nội dung */
 .nav-container {
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
+    background-color: #248958;
+    padding: 0;
     width: 100%;
     height: 44px;
-    padding-left: 30px; 
-    padding-right: 30px; 
-    background-color: #248958;
-/*    border: 1px solid red;*/
+    display: flex;
+    justify-content: center; /* Căn giữa nội dung */
+    align-items: center; /* Căn giữa theo chiều dọc */
 }
 
 .navbar-con {
     list-style-type: none;
-    padding: 0;
-    margin: 0;
     display: flex;
     justify-content: space-evenly !important;
     align-items: center;
     width: 100%;
     max-width: 1300px;
-/*    border: 1px solid yellow;*/
+    margin: 0;
+    padding: 0;
 }
-    .navbar-con li a {
-        text-decoration: none;
-        font-weight: bold;
-        color: white;
-        font-size: 16px;
-        padding: 15px 20px;
-        display: block;
+
+    .navbar-con li {
         position: relative;
-        line-height: 44px; 
-        transition: background-color 0.3s;
     }
-    .navbar-con li a::after {
-        content: ''; 
-        display: block;
-        width: 0; 
-        height: 2px;
-        background: white; 
-        transition: width 0.3s; 
-        position: absolute; 
-        left: 50%;
-        bottom: 20px; 
-        transform: translateX(-50%); 
-        z-index: 8;
+
+        .navbar-con li a {
+            text-decoration: none;
+            font-weight: bold;
+            color: white;
+            font-size: 16px;
+            padding: 0 20px;
+            display: block;
+            line-height: 44px;
+            transition: background-color 0.3s;
+        }
+
+            /* Phần underline khi hover */
+            .navbar-con li a::after {
+                content: '';
+                display: block;
+                width: 0;
+                height: 2px;
+                background: white;
+                transition: width 0.3s;
+                position: absolute;
+                left: 50%;
+                bottom: 8px;
+                transform: translateX(-50%);
+            }
+
+            .navbar-con li a:hover::after {
+                width: 95%;
+            }
+
+            .navbar-con li a:hover {
+                color: rgba(255, 255, 255, 0.8);
+            }
+
+
+
+/* Định dạng cho dropdown menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: black;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    min-width: 200px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1;
+    border-radius: 5px;
+}
+
+    .dropdown-menu li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-    .navbar-con li a:hover::after {
-        width: 95%;
-    }
-        .navbar-con li a:hover {
-            color: rgba(255, 255, 255, 0.8);
-        }         
+
+        .dropdown-menu li:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu li a {
+            color: white;
+            padding: 10px 15px;
+            font-size: 14px;
+            line-height: 1.6;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+            .dropdown-menu li a:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+                color: rgba(255, 255, 255, 0.9);
+            }
+
+/* Hiển thị dropdown menu khi hover qua mục SẢN PHẨM */
+.navbar-con li.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+
 /* 
     END HEADER 
 */
