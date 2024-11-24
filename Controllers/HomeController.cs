@@ -1,16 +1,20 @@
 using System.Diagnostics;
 using FlashShop.Models;
+using FlashShop.Repository;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace FlashShop.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly DataContext _dataContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, DataContext context)
         {
             _logger = logger;
+            _dataContext = context;
         }
 
         public IActionResult Home()
@@ -20,7 +24,8 @@ namespace FlashShop.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var products = _dataContext.Books.ToList();
+            return View(products);
         }
 
         public IActionResult Privacy()

@@ -1,0 +1,14 @@
+﻿@model IEnumerable<PublisherModel>
+
+<div class="">
+     <div class="">
+        @foreach (var item in Model)
+        {
+            <div class="panel">
+                <h4 class="panel-title">
+                    <a href="#">@item.PublisherName</a>
+                </h4>
+            </div>
+        }
+    </div>
+</div>
