@@ -2,6 +2,7 @@ using System.Diagnostics;
 using FlashShop.Models;
 using FlashShop.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace FlashShop.Controllers
@@ -24,7 +25,10 @@ namespace FlashShop.Controllers
 
         public IActionResult Index()
         {
-            var products = _dataContext.Books.ToList();
+            var products = _dataContext.Books
+                .Include(b => b.Categories) 
+                .Include(b => b.Publisher) 
+                .ToList();
             return View(products);
         }
 

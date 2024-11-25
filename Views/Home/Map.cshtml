@@ -4,15 +4,65 @@
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
 
+@section Styles {
+    <link rel="stylesheet" href="#" />
+}
+
 <div class="destination">
     <div class="location-list">
-        <div class="location-item" onclick="showLocation(10.762622, 106.660172)">
+        <div class="location-item" onclick="showLocation(10.8426347, 106.7945663)">
             KTX Đại học GTVT PH tại TP Hồ Chí Minh <br> Tăng Nhơn Phú A, Quận 9, Hồ Chí Minh, Việt Nam <br>
         </div>
+
+        <div class="location-item" onclick="showLocation('ChIJR8AeVGoUdTER1CdHVa77x0Y')">
+            Trường Đại học Giao Thông Vận Tải Phân hiệu tại TP Hồ Chí Minh
+        </div>
+
         <!-- Thêm các địa điểm khác ở đây -->
     </div>
     <div class="map-container" id="map">
-
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.577924674751!2d106.79258357369164!3d10.84357708930931!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175273de0961855%3A0x945a3348cc96bb84!2zS8ONIFTDmkMgWMOBIMSQ4bqgSSBI4buMQyBHSUFPIFRIw5RORyBW4bqsTiBU4bqiSSBQSMOCTiBISeG7hlUgVOG6oEkgVFAuSENN!5e0!3m2!1svi!2s!4v1730611326322!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.577924674751!2d106.79258357369164!3d10.84357708930931!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175273de0961855%3A0x945a3348cc96bb84!2zS8ONIFTDmkMgWMOBIMSQ4bqgSSBI4buMQyBHSUFPIFRIw5RORyBW4bqsTiBU4bqiSSBQSMOCTiBISeG7hlUgVOG6oEkgVFAuSENN!5e0!3m2!1svi!2s!4v1730611326322!5m2!1svi!2s" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
+</div>
+
+<script>
+    function showLocation(lat, lng) {
+        const iframe = document.querySelector('#map iframe');
+        iframe.src = `https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15676.000000000001!2d${lng}!3d${lat}!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x0!2z!5e0!3m2!1svi!2s!4v${Date.now()}!5m2!1svi!2s`;
+    }
+
+    function showLocation(placeId) {
+        const iframe = document.querySelector('#map iframe');
+        iframe.src = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.577924674751!2d106.79258357369164!3d10.84357708930931!4m2!3m1!1s${placeId}`;
+    }
+</script>
+
+<style>
+    .destination {
+        display: flex;
+    }
+
+    .location-list {
+        width: 27%;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-right: 1px solid #ddd;
+    }
+
+    .location-item {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        cursor: pointer;
+    }
+
+        .location-item:hover {
+            background-color: #e0e0e0;
+            transition: background-color 0.3s ease;
+        }
+
+
+    .map-container {
+        margin-left: 40px;
+    }
+</style>
+

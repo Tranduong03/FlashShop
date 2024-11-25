@@ -1,14 +1,15 @@
 ﻿@model IEnumerable<PublisherModel>
 
-<div class="">
-     <div class="">
-        @foreach (var item in Model)
-        {
-            <div class="panel">
-                <h4 class="panel-title">
-                    <a href="#">@item.PublisherName</a>
-                </h4>
-            </div>
-        }
+@foreach (var item in Model)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a asp-action="Index" asp-controller="Publisher" asp-route-id="@item.PublisherId">
+                    @item.PublisherName
+                </a>
+            </h4>
+        </div>
     </div>
-</div>
+}
+
