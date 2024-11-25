@@ -1,4 +1,4 @@
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Diagnostics;
 using FlashShop.Models;
 using FlashShop.Repository;
@@ -44,9 +44,10 @@ namespace FlashShop.Controllers
             var products = _dataContext.Books.ToList();
             return View(products);
         }
+        /*Tìm kiếm dựa theo "Title" và ""Description" thông qua từ khóa được gán vào "searchTerm"*/
         public async Task<IActionResult> Search(string searchTerm)
         {
-            var products =  _dataContext.Books
+            var products = _dataContext.Books
                 .Where(p => p.Title.Contains(searchTerm) || p.Description.Contains(searchTerm))
                 .ToList();
 
