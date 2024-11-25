@@ -1,3 +1,4 @@
+using System.Data.Entity;
 using System.Diagnostics;
 using FlashShop.Models;
 using FlashShop.Repository;
@@ -36,6 +37,22 @@ namespace FlashShop.Controllers
         public IActionResult Map()
         {
             return View();
+        }
+
+        public IActionResult Product()
+        {
+            var products = _dataContext.Books.ToList();
+            return View(products);
+        }
+        public async Task<IActionResult> Search(string searchTerm)
+        {
+            var products =  _dataContext.Books
+                .Where(p => p.Title.Contains(searchTerm) || p.Description.Contains(searchTerm))
+                .ToList();
+
+            ViewBag.Keyword = searchTerm;
+
+            return View(products);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
