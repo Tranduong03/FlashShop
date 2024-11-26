@@ -1,6 +1,44 @@
-﻿@{
+﻿@model IEnumerable<BookModel>
+
+@{
     ViewData["Title"] = "Admin";
     // Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
-<h3>List Books</h3>
+<a asp-action="Create" asp-controller="Book">Thêm</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tựa đề</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Hình ảnh</th>
+            <th scope="col">Mô tả</th>
+            <th scope="col">Tác giả</th>
+            <th scope="col">Năm xuất bản</th>
+            <th scope="col">Đánh giá</th>
+            <th scope="col">Thể loại</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.BookId</th>
+                <td>@item.Title</td>
+                <td>@item.Price</td>
+                <td>@item.Quantity</td>
+                <td><img src="~/images/@item.ImgLink" width="120" /></td>
+                <td>@item.Description</td>
+                <td>@item.Author</td>
+                <td>@item.Publication</td>
+                <td>@item.Point</td>
+                <td>@item.Categories.CategoryName</td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-warning btn-sm" asp-controller="Book" asp-route-id="@item.BookId">Sửa</a>
+                    <a asp-action="Delete" class="btn btn-warning btn-sm" asp-controller="Book" asp-route-id="@item.BookId">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
