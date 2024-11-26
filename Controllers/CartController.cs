@@ -133,8 +133,7 @@ namespace FlashShop.Controllers
             return RedirectToAction("Index");
         }
 
-
-        public async Task<IActionResult> Clear()
+        public IActionResult Clear()
         {
             HttpContext.Session.Remove("Cart");
             TempData["success"] = "Xóa toàn bộ sách khỏi giỏ hàng thành công";

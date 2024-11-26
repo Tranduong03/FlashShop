@@ -12,6 +12,14 @@
 	<link href="~/css/prettyPhoto.css" rel="stylesheet">
 	<link href="~/css/animate.css" rel="stylesheet">
 	<link href="~/css/responsive.css" rel="stylesheet">
+
+	<!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+	<!-- Toastify CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+
 	@RenderSection("Styles", required: false)
 	<!--[if lt IE 9]>
 	<script src="js/html5shiv.js"></script>
@@ -59,7 +67,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="@Url.Action("Home", "Home")"><img src="~/images/faviconx3.png" alt="LOGO FLASH-SHOP" width="60px" /></a>
+							<a href="@Url.Action("Home", "Home")"><img src="~/images/faviconx3.png" alt="LOGO FLASH-SHOP" width="60" /></a>
 						</div>
 						<div class="btn-group pull-right">
 							<div class="btn-group">
@@ -315,6 +323,12 @@
 		</div>
 
 	</footer><!--/Footer-->
+
+	<!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- Toastify JS -->
+	<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 	<script src="~/js/jquery.js"></script>
 	<script src="~/js/bootstrap.min.js"></script>

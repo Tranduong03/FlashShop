@@ -1,12 +1,62 @@
-﻿
-@if (TempData["success"] != null) {
-    <div class="alert alert-success notification">
-        @TempData["success"]
-    </div>
+﻿@if (TempData["success"] != null || TempData["error"] != null)
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toastMessage = "@(TempData["success"] ?? TempData["error"])";
+            const toastType = "@(TempData["success"] != null ? "success" : "error")";
+
+            if (toastMessage) {
+                showToast(toastMessage, toastType);
+            }
+        });
+
+        function showToast(message, type) {
+            Swal.fire({
+                toast: true,
+                icon: type,
+                title: message,
+                position: 'top-right',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                showCloseButton: true,
+                customClass: {
+                    popup: type === 'success' ? 'swal-success-toast' : 'swal-error-toast'
+                },
+                closeButtonHtml: '&times;',
+            });
+        }
+    </script>
 }
 
-@if (TempData["error"] != null) {
-    <div class="alert alert-danger notification">
-        @TempData["error"]
-    </div>
-}
+<style>
+    .swal-success-toast {
+        background-color: #e4fde1 !important;
+        color: #228b22 !important;
+        border: 1px solid #c7f9cc !important;
+        font-size: 13px !important;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 100, 0, 0.3);
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .swal-error-toast {
+        background-color: #f2695a !important;
+        color: darkred;
+        border: 1px solid #f8d7da !important;
+        font-size: 13px !important;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(158, 42, 47, 0.3); 
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .swal2-icon.swal2-icon-success {
+        border-color: #228b22 !important;
+        color: #228b22 !important;
+    }
+
+    .swal2-icon.swal2-icon-error {
+        border-color: #fff !important;
+        color: #fff !important;
+    }
+</style>
