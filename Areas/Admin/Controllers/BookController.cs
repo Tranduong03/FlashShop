@@ -121,13 +121,28 @@ namespace FlashShop.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                var title = await _dataContext.Books.FirstOrDefaultAsync(b => b.Title == book.Title);
+                var existingBook = await _dataContext.Books.FindAsync(id);
+                if (existingBook == null)
+                {
+                    TempData["errorAdmin"] = "Không tìm thấy sách với ID được cung cấp!";
+                    return NotFound();
+                }
+
+                var title = await _dataContext.Books
+                    .FirstOrDefaultAsync(b => b.Title == book.Title && b.BookId != id);
                 if (title != null)
                 {
                     ModelState.AddModelError("", "Sản phẩm này đã tồn tại");
                     TempData["errorAdmin"] = "Tên sản phẩm trùng với sản phẩm khác";
-                    //return View(book);
+                    return View(book);
                 }
+
+                existingBook.Title = book.Title;
+                existingBook.Description = book.Description;
+                existingBook.CategoryId = book.CategoryId;
+                existingBook.PublisherId = book.PublisherId;
+                existingBook.Publication = book.Publication;
+                existingBook.Price = book.Price;
 
                 if (book.ImgLinkUpload != null)
                 {
@@ -135,34 +150,39 @@ namespace FlashShop.Areas.Admin.Controllers
                     string imageName = Guid.NewGuid().ToString() + "_" + book.ImgLinkUpload.FileName;
                     string filePath = Path.Combine(uploadsDir, imageName);
 
-                    FileStream fs = new FileStream(filePath, FileMode.Create);
-                    await book.ImgLinkUpload.CopyToAsync(fs);
-                    fs.Close();
-                    book.ImgLink = imageName;
+                    using (var fs = new FileStream(filePath, FileMode.Create))
+                    {
+                        await book.ImgLinkUpload.CopyToAsync(fs);
+                    }
+
+                    existingBook.ImgLink = imageName;
                 }
 
-                _dataContext.Update(book);
                 await _dataContext.SaveChangesAsync();
                 TempData["successAdmin"] = "Cập nhật thông tin sản phẩm thành công vào Cơ sở dữ liệu";
                 return RedirectToAction("Index");
             }
-            else
-            {
-                TempData["errorAdmin"] = "Model có một vài thứ đang bị lỗi";
-                List<string> errors = new List<string>();
-                foreach (var value in ModelState.Values)
-                {
-                    foreach (var error in value.Errors)
-                    {
-                        errors.Add(error.ErrorMessage);
-                    }
-                }
-                string errorMessage = string.Join("\n", errors);
-                errorMessage += book.Categories;
 
-                return BadRequest(errorMessage);
-            }
+            TempData["errorAdmin"] = "Model có một vài thứ đang bị lỗi";
+            return View(book);
         }
 
+        public async Task<IActionResult> Delete(int id)
+        {
+            BookModel book = await _dataContext.Books.FindAsync(id);
+            if (!string.Equals(book.ImgLink, "No_image.jpg"))
+            {
+                string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "images/book");
+                string oldfileImg = Path.Combine(uploadsDir, book.ImgLink);
+                if (System.IO.File.Exists(oldfileImg))
+                {
+                    System.IO.File.Delete(oldfileImg);
+                }
+            }
+            _dataContext.Books.Remove(book);
+            await _dataContext.SaveChangesAsync();
+            TempData["errorAdmin"] = "Sản phẩm đã xóa";
+            return RedirectToAction("Index");
+        }
     }
 }

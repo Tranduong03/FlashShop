@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewData["Title"] = "Not Found 404";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fff;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+            .container img {
+                width: 100%;
+                max-width: 600px;
+                height: auto;
+            }
+
+            .container h1 {
+                font-size: 100px;
+                color: #000;
+                margin: 0;
+                text-shadow: 2px 2px 10px #00ffdc;
+            }
+
+            .container p {
+                font-size: 18px;
+                color: #555;
+                margin: 20px 0;
+            }
+
+            .container a {
+                display: inline-block;
+                text-decoration: none;
+                color: #000;
+                border: 2px solid #000;
+                padding: 10px 20px;
+                font-size: 18px;
+                margin-top: 20px;
+                transition: all 0.3s ease;
+            }
+
+                .container a:hover {
+                    background-color: #000;
+                    color: #fff;
+                }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+            .social-icons a {
+                display: inline-block;
+                margin: 0 10px;
+                color: #000;
+                font-size: 24px;
+                transition: color 0.3s ease;
+            }
+
+                .social-icons a:hover {
+                    color: #00ffdc;
+                }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>404</h1>
+        <p>Page not found</p>
+        <p>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+        <a href="@Url.Action("Index", "Home")">HOMEPAGE</a>
+    </div>
+</body>
+</html>

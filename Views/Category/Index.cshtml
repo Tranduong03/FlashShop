@@ -97,7 +97,7 @@
 									<p> Danh mục: @item.Categories.CategoryName </p>
 									<p> Nhà xuất bản: @item.Publisher.PublisherName </p>
 								-->
-								<a class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"> Giỏ hàng </i></a>
+								<a class="btn btn-default add-to-cart" asp-action="Add" asp-controller="Cart" asp-route-id="@item.BookId"><i class="fa fa-shopping-cart"> Giỏ hàng </i></a>
 							</div>
 						</div>
 					</a>
