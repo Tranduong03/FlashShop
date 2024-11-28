@@ -1,7 +1,7 @@
 ﻿@model BookModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
 @section Styles {
@@ -9,10 +9,10 @@
 }
 
 <div class="container">
-    <h4>THÊM MỚI SÁCH</h4>
+    <h4>SỬA THÔNG TIN SÁCH</h4>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <form asp-action="Create" enctype="multipart/form-data">
+            <form asp-action="Edit" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label>Tựa đề</label>
@@ -33,6 +33,7 @@
                     <label>Hình ảnh</label>
                     <input asp-for="ImgLinkUpload" class="form-control" />
                     <span asp-validation-for="ImgLinkUpload" class="text-danger" />
+                    <td><img src="~/images/book/@Model.ImgLink" width="150" /></td>
                 </div>
                 <div class="form-group">
                     <label>Mô tả</label>
@@ -47,9 +48,9 @@
                 <div class="form-group">
                     <label>Năm xuất bản</label>
                     <select asp-for="Publication" class="form-control" asp-items="ViewBag.Years">
-                        <option>--Chọn năm--</option>
+                        <option value="">--Chọn năm--</option>
                     </select>
-                    <span asp-validation-for="Publication" class="text-danger" />
+                    <span asp-validation-for="Publication" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label>Đánh giá</label>
@@ -71,7 +72,7 @@
                     <span asp-validation-for="PublisherId" class="text-danger" />
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary">Thêm</button>
+                    <button class="btn btn-primary">Cập Nhật</button>
                 </div>
             </form>
             <a asp-action="Index">Quay lại</a>

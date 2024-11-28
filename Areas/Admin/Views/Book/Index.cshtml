@@ -1,23 +1,30 @@
 ﻿@model IEnumerable<BookModel>
 
 @{
-    ViewData["Title"] = "Admin";
+    ViewData["Title"] = "Book";
     // Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<a asp-action="Create" asp-controller="Book">Thêm</a>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/adminSite.css" />
+}
+
+<a asp-action="Create" asp-controller="Book">Thêm sách mới</a>
+
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col">ID</th>
             <th scope="col">Tựa đề</th>
             <th scope="col">Giá</th>
-            <th scope="col">Số lượng</th>
+            <th scope="col" class="quantity-column">Kho</th>
             <th scope="col">Hình ảnh</th>
-            <th scope="col">Mô tả</th>
+            <th scope="col" class="description-column">Mô tả</th>
             <th scope="col">Tác giả</th>
             <th scope="col">Năm xuất bản</th>
-            <th scope="col">Đánh giá</th>
             <th scope="col">Thể loại</th>
+            <th scope="col">Nhà xuất bản</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -27,16 +34,18 @@
                 <th scope="row">@item.BookId</th>
                 <td>@item.Title</td>
                 <td>@item.Price</td>
-                <td>@item.Quantity</td>
-                <td><img src="~/images/@item.ImgLink" width="120" /></td>
-                <td>@item.Description</td>
+                <td class="quantity-column">@item.Quantity</td>
+                <td><img src="~/images/book/@item.ImgLink" width="90" /></td>
+                <td class="description-column">@item.Description</td>
                 <td>@item.Author</td>
                 <td>@item.Publication</td>
-                <td>@item.Point</td>
                 <td>@item.Categories.CategoryName</td>
+                <td>@item.Publisher.PublisherName</td>
                 <td>
-                    <a asp-action="Edit" class="btn btn-warning btn-sm" asp-controller="Book" asp-route-id="@item.BookId">Sửa</a>
-                    <a asp-action="Delete" class="btn btn-warning btn-sm" asp-controller="Book" asp-route-id="@item.BookId">Xóa</a>
+                    <div class="action-buttons">
+                        <a asp-action="Edit" class="btn btn-warning btn-sm edit" asp-controller="Book" asp-route-id="@item.BookId">Sửa</a>
+                        <a asp-action="Delete" class="btn btn-warning btn-sm delete" asp-controller="Book" asp-route-id="@item.BookId">Xóa</a>
+                    </div>
                 </td>
             </tr>
         }
