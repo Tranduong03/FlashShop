@@ -36,7 +36,9 @@
                 <td>@item.Price</td>
                 <td class="quantity-column">@item.Quantity</td>
                 <td><img src="~/images/book/@item.ImgLink" width="90" alt="Book Image" /></td>
-                <td class="description-column">@item.Description</td>
+                <td class="description-column">
+                    @(item.Description?.Length > 80 ? item.Description.Substring(0, Math.Min(80, item.Description.Length)) + "..." : item.Description)
+                </td>
                 <td>@item.Author</td>
                 <td>@item.Publication</td>
                 <td>@item.Categories?.CategoryName</td>
