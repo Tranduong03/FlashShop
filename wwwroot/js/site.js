@@ -1,4 +1,5 @@
-﻿$(function () {
+﻿
+$(function () {
 
     if ($("a.confirmDeletion").length) {
         $("a.confirmDeletion").click(() => {
@@ -25,3 +26,4 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+

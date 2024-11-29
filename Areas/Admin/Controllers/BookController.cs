@@ -169,8 +169,15 @@ namespace FlashShop.Areas.Admin.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            BookModel book = await _dataContext.Books.FindAsync(id);
-            if (!string.Equals(book.ImgLink, "No_image.jpg"))
+            var book = await _dataContext.Books.FindAsync(id);
+            if (book == null)
+            {
+                TempData["errorAdmin"] = "Không tìm thấy sản phẩm để xóa!";
+                return NotFound();
+            }
+
+            // Xóa ảnh nếu không phải "No_image.jpg"
+            if (!string.Equals(book.ImgLink, "No_image.jpg", StringComparison.OrdinalIgnoreCase))
             {
                 string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "images/book");
                 string oldfileImg = Path.Combine(uploadsDir, book.ImgLink);
@@ -179,10 +186,14 @@ namespace FlashShop.Areas.Admin.Controllers
                     System.IO.File.Delete(oldfileImg);
                 }
             }
+
+            // Xóa sách khỏi cơ sở dữ liệu
             _dataContext.Books.Remove(book);
             await _dataContext.SaveChangesAsync();
-            TempData["errorAdmin"] = "Sản phẩm đã xóa";
+
+            TempData["successAdmin"] = "Sản phẩm đã được xóa thành công!";
             return RedirectToAction("Index");
         }
+
     }
 }
