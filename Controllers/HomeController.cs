@@ -23,13 +23,30 @@ namespace FlashShop.Controllers
             return View();
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pg=1)
         {
-            var products = _dataContext.Books
+            List<BookModel> products = _dataContext.Books
                 .Include(b => b.Categories) 
                 .Include(b => b.Publisher) 
                 .ToList();
-            return View(products);
+
+            const int pageSize = 3;
+
+            if (pg < 1)
+            {
+                pg = 1;
+            }
+            int ResCount = products.Count;
+
+            var pager = new Paginate(ResCount, pg, pageSize);
+
+            int recSkip = (pg - 1) * pageSize;
+
+            var data = products.Skip(recSkip).Take(pager.PageSize).ToList();
+
+            ViewBag.Pager = pager;
+
+            return View(data);
         }
 
         public IActionResult Privacy()
