@@ -50,7 +50,7 @@ namespace FlashShop.Repository
             }
 
             // Thêm sách mới nếu chưa có
-            if (!_context.Books.Any(b => b.Title == "Conan tập 1"))
+            if (!_context.Books.Any())
             {
                 _context.Books.Add(new BookModel
                 {

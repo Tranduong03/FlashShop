@@ -119,9 +119,10 @@ namespace FlashShop.Areas.Admin.Controllers
             var years = Enumerable.Range(currentYear - 99, 100).Select(x => x.ToString()).ToList();
             ViewBag.Years = new SelectList(years, book.Publication?.ToString());
 
+            var existingBook = await _dataContext.Books.FindAsync(id);
+
             if (ModelState.IsValid)
             {
-                var existingBook = await _dataContext.Books.FindAsync(id);
                 if (existingBook == null)
                 {
                     TempData["errorAdmin"] = "Không tìm thấy sách với ID được cung cấp!";
@@ -135,14 +136,7 @@ namespace FlashShop.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Sản phẩm này đã tồn tại");
                     TempData["errorAdmin"] = "Tên sản phẩm trùng với sản phẩm khác";
                     return View(book);
-                }
-
-                existingBook.Title = book.Title;
-                existingBook.Description = book.Description;
-                existingBook.CategoryId = book.CategoryId;
-                existingBook.PublisherId = book.PublisherId;
-                existingBook.Publication = book.Publication;
-                existingBook.Price = book.Price;
+                }                        
 
                 if (book.ImgLinkUpload != null)
                 {
@@ -157,6 +151,16 @@ namespace FlashShop.Areas.Admin.Controllers
 
                     existingBook.ImgLink = imageName;
                 }
+
+                existingBook.Title = book.Title;
+                existingBook.Price = book.Price;
+                existingBook.Quantity = book.Quantity;
+                existingBook.Description = book.Description;
+                existingBook.Author = book.Author;
+                existingBook.Publication = book.Publication;
+                existingBook.Point = book.Point;
+                existingBook.CategoryId = book.CategoryId;
+                existingBook.PublisherId = book.PublisherId;
 
                 await _dataContext.SaveChangesAsync();
                 TempData["successAdmin"] = "Cập nhật thông tin sản phẩm thành công vào Cơ sở dữ liệu";

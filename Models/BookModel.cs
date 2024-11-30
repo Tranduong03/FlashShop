@@ -22,11 +22,11 @@ namespace FlashShop.Models
         [Required]
         public int Quantity { get; set; }
 
-        public string ImgLink { get; set; } = "No_image.jpg";
+        public string ImgLink { get; set; }
 
         [NotMapped]
         [FileExtension]
-        public IFormFile ImgLinkUpload { get; set; }
+        public IFormFile? ImgLinkUpload { get; set; }
 
         [StringLength(255)]
         public string Description { get; set; }

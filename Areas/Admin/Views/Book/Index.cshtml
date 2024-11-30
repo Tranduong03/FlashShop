@@ -15,7 +15,7 @@
     <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Tựa đề</th>
+            <th scope="col" class="title-column">Tựa đề</th>
             <th scope="col">Giá</th>
             <th scope="col" class="quantity-column">Kho</th>
             <th scope="col">Hình ảnh</th>
@@ -32,7 +32,7 @@
         {
             <tr>
                 <th scope="row">@item.BookId</th>
-                <td>@item.Title</td>
+                <td class="title-column">@item.Title</td>
                 <td>@item.Price</td>
                 <td class="quantity-column">@item.Quantity</td>
                 <td><img src="~/images/book/@item.ImgLink" width="90" alt="Book Image" /></td>
