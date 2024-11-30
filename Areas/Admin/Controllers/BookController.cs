@@ -18,9 +18,27 @@ namespace FlashShop.Areas.Admin.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pg = 1)
         {
-            return View(await _dataContext.Books.OrderBy(b => b.BookId).Include(c => c.Categories).Include(nxb => nxb.Publisher).ToListAsync());
+           List<BookModel> book = _dataContext.Books.ToList();
+
+            const int pageSize = 3;
+
+            if (pg < 1)
+            {
+                pg = 1;
+            }
+            int ResCount = book.Count;
+
+            var pager = new Paginate(ResCount, pg, pageSize);
+
+            int recSkip = (pg - 1) * pageSize;
+
+            var data = book.Skip(recSkip).Take(pager.PageSize).ToList();
+
+            ViewBag.Pager = pager;
+
+            return View(data);
         }
 
         public IActionResult Create()
