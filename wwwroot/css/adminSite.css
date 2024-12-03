@@ -9,7 +9,7 @@
 }
 
 .table tbody tr:nth-child(odd) {
-    background-color: #E5F6EB;
+    background-color:#F2FBF6;
 }
 
 .table tbody tr:nth-child(even) {
@@ -51,7 +51,7 @@
 
 
 .table .description-column {
-    max-width: 280px !important;  
+    max-width: 300px !important;  
     overflow: hidden; 
     text-overflow: ellipsis;
 }
