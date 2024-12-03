@@ -91,6 +91,9 @@
         })
     </script>
     <script>
-        CKEDITOR.replace('Description');
+        CKEDITOR.replace('Description', {
+            allowedContent: true, // Cho phép nội dung HTML không bị lọc
+            startupMode: 'source' // Mở chế độ xem mã nguồn HTML khi khởi động
+        });
     </script>
 }

@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="~/css/adminSite.css" />
 }
 
-<a asp-action="Create" asp-controller="Book" class="btn btn-primary mb-3">Thêm sách mới</a>
+<a asp-action="Create" asp-controller="Book" class="btn btn-primary mb-3 mt-3">Thêm sách mới</a>
 
 <table class="table">
     <thead>
@@ -46,7 +46,7 @@
                 <td class="quantity-column">@item.Quantity</td>
                 <td><img src="~/images/book/@item.ImgLink" width="95" alt="Book Image" /></td>
                 <td class="description-column">
-                    @(item.Description?.Length > 95 ? item.Description.Substring(0, Math.Min(95, item.Description.Length)) + "..." : item.Description)
+                    @(item.Description?.Length > 100 ? item.Description.Substring(0, Math.Min(100, item.Description.Length)) + "..." : item.Description)
                 </td>
                 <td>@item.Author</td>
                 <td>@item.Publication</td>
