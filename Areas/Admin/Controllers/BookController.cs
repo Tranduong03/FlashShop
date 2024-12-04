@@ -132,69 +132,6 @@ namespace FlashShop.Areas.Admin.Controllers
             return View(book);
         }
 
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, BookModel book)
-        //{
-        //    ViewBag.Categories = new SelectList(_dataContext.Categories, "CategoryId", "CategoryName", book.CategoryId);
-        //    ViewBag.Publishers = new SelectList(_dataContext.Publishers, "PublisherId", "PublisherName", book.PublisherId);
-
-        //    var currentYear = DateTime.Now.Year;
-        //    var years = Enumerable.Range(currentYear - 99, 100).Select(x => x.ToString()).ToList();
-        //    ViewBag.Years = new SelectList(years, book.Publication?.ToString());
-
-        //    var existingBook = await _dataContext.Books.FindAsync(id);
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (existingBook == null)
-        //        {
-        //            TempData["errorAdmin"] = "Không tìm thấy sách với ID được cung cấp!";
-        //            return NotFound();
-        //        }
-
-        //        //var title = await _dataContext.Books.FirstOrDefaultAsync(b => b.Title == book.Title && b.BookId != id);
-        //        //if (title != null)
-        //        //{
-        //        //    ModelState.AddModelError("", "Sản phẩm này đã tồn tại");
-        //        //    TempData["errorAdmin"] = "Tên sản phẩm trùng với sản phẩm khác";
-        //        //    return View(book);
-        //        //}                        
-
-        //        if (book.ImgLinkUpload != null)
-        //        {
-        //            string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "images/book");
-        //            string imageName = Guid.NewGuid().ToString() + "_" + book.ImgLinkUpload.FileName;
-        //            string filePath = Path.Combine(uploadsDir, imageName);
-
-        //            using (var fs = new FileStream(filePath, FileMode.Create))
-        //            {
-        //                await book.ImgLinkUpload.CopyToAsync(fs);
-        //            }
-
-        //            existingBook.ImgLink = imageName;
-        //        }
-
-        //        existingBook.Title = book.Title;
-        //        existingBook.Price = book.Price;
-        //        existingBook.Quantity = book.Quantity;
-        //        existingBook.Description = book.Description;
-        //        existingBook.Author = book.Author;
-        //        existingBook.Publication = book.Publication;
-        //        existingBook.Point = book.Point;
-        //        existingBook.CategoryId = book.CategoryId;
-        //        existingBook.PublisherId = book.PublisherId;
-
-        //        await _dataContext.SaveChangesAsync();
-        //        TempData["successAdmin"] = "Cập nhật thông tin sách thành công";
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    TempData["errorAdmin"] = "Cập nhật thông tin sách không thành công";
-        //    return View(book);
-        //}
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, BookModel book)
@@ -216,8 +153,7 @@ namespace FlashShop.Areas.Admin.Controllers
                     return NotFound();
                 }
 
-                var title = await _dataContext.Books
-                    .FirstOrDefaultAsync(b => b.Title == book.Title && b.BookId != id);
+                var title = await _dataContext.Books.FirstOrDefaultAsync(b => b.Title == book.Title && b.BookId != id);
                 if (title != null)
                 {
                     ModelState.AddModelError("", "Sản phẩm này đã tồn tại");
@@ -262,11 +198,11 @@ namespace FlashShop.Areas.Admin.Controllers
                 existingBook.PublisherId = book.PublisherId;
 
                 await _dataContext.SaveChangesAsync();
-                TempData["successAdmin"] = "Cập nhật thông tin sản phẩm thành công vào Cơ sở dữ liệu";
+                TempData["successAdmin"] = "Cập nhật thông tin sản phẩm thành công";
                 return RedirectToAction("Index");
             }
 
-            TempData["errorAdmin"] = "Model có một vài thứ đang bị lỗi";
+            TempData["errorAdmin"] = "Có lỗi xảy ra! Hãy thử lại";
             return View(book);
         }
 

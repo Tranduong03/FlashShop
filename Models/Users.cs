@@ -9,17 +9,17 @@ namespace FlashShop.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int userID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập Tên đăng nhập")]
         public string userName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập Email")]
         [EmailAddress]
         public string email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập Tài khoản")]
         public string account { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
         [StringLength(20)]
         [DataType(DataType.Password)]
         public string password { get; set; }

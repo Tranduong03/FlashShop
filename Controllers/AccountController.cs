@@ -130,8 +130,8 @@ namespace FlashShop.Controllers
 				var emailService = new EmailService(_configuration);  // Inject email service
 				await emailService.SendEmailAsync(emailvalid.email, "Your OTP Code", $"Your OTP is: {SaveOTP}");
 				TempData["SuccessMessage"] = $"Đã gửi OTP về Email {emailvalid.email}";
-
-				return RedirectToAction("InputOTP");
+                TempData["success"] = $"Đã gửi OTP về Email {emailvalid.email}";
+                return RedirectToAction("InputOTP");
 			}
 			else
 			{
@@ -150,6 +150,7 @@ namespace FlashShop.Controllers
             if (GetOtp == OTP)
             {
                 TempData["SuccessMessage"] = $"OTP verified successfully for {email}.";
+                TempData["success"] = $"OTP verified successfully for {email}.";
                 // Redirect to a password reset view or perform other actions
                 return RedirectToAction("ResetPassword");
             }
@@ -191,6 +192,7 @@ namespace FlashShop.Controllers
                 await _context.SaveChangesAsync();
 
                 TempData["SuccessMessage"] = "Your password has been reset successfully!";
+                TempData["success"] = "Your password has been reset successfully!";
                 return RedirectToAction("Login"); // Chuyển hướng về trang đăng nhập
             }
             else

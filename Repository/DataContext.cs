@@ -1,10 +1,11 @@
 ﻿using FlashShop.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 //using System.Data.Entity;
 
 namespace FlashShop.Repository
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext <AppUserModel>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
