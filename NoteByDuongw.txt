@@ -1,6 +1,0 @@
-﻿-- 21/10 --
-Để tạo migration gõ lệnh "Add-Migration FirstMigration" vào Package manager console
-Để tạo bảng bằng migrations gõ lệnh "Update-database" vào Package manager console
-Done 
-
-
