@@ -11,37 +11,53 @@
 @model FlashShop.Models.AccountCheck;
 
 <link href="~/css/login.css" rel="stylesheet" />
+@section Content{
+<div id="content" class="content">
+    <div class="main" id="main" style="background-color: #C8FFD8; /* Màu xanh lá cây */
+    border-radius: 10px;
+    height: 580px;
+    margin:50px 320px 0;
+    padding:40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
-<form asp-action="Login" method="post" class="form-container">
-    <div class="form-group">
-        <label asp-for="account" class="form-label"></label>
-        <input asp-for="account" class="form-input" />
-        <span asp-validation-for="account" class="form-validation"></span>
+    overflow: hidden; /* Ngăn form-container vượt ra ngoài main */">
+        <form asp-action="Login" method="post" class="form-container" style="position:relative; top:-150px; ">
+            <div class="user" style="text-align:center;">
+                <img src="~/images/user.png" />
+                <h1>WELCOME</h1>
+            </div>
+            <div class="form-group">
+                <label asp-for="account" class="form-label"></label>
+                <input asp-for="account" class="form-input" />
+                <span asp-validation-for="account" class="form-validation"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="password" class="form-label"></label>
+                <input asp-for="password" type="password" id="passwordField" class="form-input" />
+                <span asp-validation-for="password" class="form-validation"></span>
+            </div>
+
+            <!-- Checkbox để hiển thị mật khẩu -->
+            <div class="form-group">
+                <input type="checkbox" id="showPassword" class="form-checkbox" onclick="togglePasswordVisibility()" />
+                <label for="showPassword" class="form-checkbox-label">Show Password</label>
+            </div>
+
+            <button type="submit" class="btn-submit" style="background-color: #008000;">Login</button>
+
+            <!-- Liên kết Quên mật khẩu và Đăng kí tài khoản -->
+            <div class="form-links">
+                <a asp-action="Forgot" class="link">Forgot Password?</a>
+            </div>
+            <div class="form-links">
+                Don't have an account? <a asp-action="Register" class="link">Register here</a>
+            </div>
+        </form>
     </div>
+</div>
 
-    <div class="form-group">
-        <label asp-for="password" class="form-label"></label>
-        <input asp-for="password" type="password" id="passwordField" class="form-input" />
-        <span asp-validation-for="password" class="form-validation"></span>
-    </div>
-
-    <!-- Checkbox để hiển thị mật khẩu -->
-    <div class="form-group">
-        <input type="checkbox" id="showPassword" class="form-checkbox" onclick="togglePasswordVisibility()" />
-        <label for="showPassword" class="form-checkbox-label">Show Password</label>
-    </div>
-
-    <button type="submit" class="btn-submit">Login</button>
-
-    <!-- Liên kết Quên mật khẩu và Đăng kí tài khoản -->
-    <div class="form-links">
-        <a asp-action="Forgot" class="link">Forgot Password?</a>
-    </div>
-    <div class="form-links">
-        Don't have an account? <a asp-action="Register" class="link">Register here</a>
-    </div>
-</form>
-
+}
 <script>
     function togglePasswordVisibility() {
         var passwordField = document.getElementById("passwordField");

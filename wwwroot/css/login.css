@@ -1,4 +1,7 @@
-﻿/* General form styling for both Login and Register forms */
+﻿.user{
+    text-align:center;
+}
+/* General form styling for both Login and Register forms */
 .form-container {
     max-width: 400px;
     margin: 0 auto;

@@ -6,40 +6,50 @@
 
 @model FlashShop.Models.Users;
 <link href="~/css/login.css" rel="stylesheet" />
-<form asp-action="Register" method="post" class="form-container">
-    <div class="form-group">
-        <label asp-for="userName" class="form-label"></label>
-        <input asp-for="userName" class="form-input" />
-        <span asp-validation-for="userName" class="form-validation"></span>
+<div id="content" class="content">
+    <div class="main" id="main" style="background-color: #C8FFD8; /* Màu xanh lá cây */
+    border-radius: 10px;
+    height: 600px;
+    margin:50px 320px 0;
+    padding:40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+    overflow: hidden; /* Ngăn form-container vượt ra ngoài main */">
+        <form asp-action="Register" method="post" class="form-container" style="position:relative; top:-150px; ">
+        <div class="form-group">
+            <label asp-for="userName" class="form-label"></label>
+            <input asp-for="userName" class="form-input" />
+            <span asp-validation-for="userName" class="form-validation"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="account" class="form-label"></label>
+            <input asp-for="account" class="form-input" />
+            <span asp-validation-for="account" class="form-validation"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="email" class="form-label"></label>
+            <input asp-for="email" class="form-input" />
+            <span asp-validation-for="email" class="form-validation"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="password" class="form-label"></label>
+            <input asp-for="password" type="password" class="form-input" />
+            <span asp-validation-for="password" class="form-validation"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ConfirmPassword" class="form-label"></label>
+            <input asp-for="ConfirmPassword" type="password" class="form-input" />
+            <span asp-validation-for="ConfirmPassword" class="form-validation"></span>
+        </div>
+
+            <button type="submit" class="btn-submit" style="background-color: #008000;">Register</button>
+    </form>
     </div>
-
-    <div class="form-group">
-        <label asp-for="account" class="form-label"></label>
-        <input asp-for="account" class="form-input" />
-        <span asp-validation-for="account" class="form-validation"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="email" class="form-label"></label>
-        <input asp-for="email" class="form-input" />
-        <span asp-validation-for="email" class="form-validation"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="password" class="form-label"></label>
-        <input asp-for="password" type="password" class="form-input" />
-        <span asp-validation-for="password" class="form-validation"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="ConfirmPassword" class="form-label"></label>
-        <input asp-for="ConfirmPassword" type="password" class="form-input" />
-        <span asp-validation-for="ConfirmPassword" class="form-validation"></span>
-    </div>
-
-    <button type="submit" class="btn-submit">Register</button>
-</form>
-
+</div>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

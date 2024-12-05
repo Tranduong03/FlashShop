@@ -39,7 +39,7 @@
                     <div class="account">
                         <a href="@Url.Action("Login", "Account")">
                             <i class="fa-solid fa-user-large fa-xl"></i>
-                            <p style="color:black;">TÀI KHOẢN</p>
+                            <p>TÀI KHOẢN</p>
                         </a>
                     </div>
                     <div class="shopping-cart">
@@ -64,11 +64,32 @@
         </nav>
     </header>
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <!-- Vùng dành cho banner nằm ở trang Home -->
+    @RenderSection("Banner", required: false)
+
+    <div class="main-container d-flex">
+        @RenderSection("Sidebar", required: false)
+        <!-- Sidebar bên trái -->
+       <!-- <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="#">Mục 1</a></li>
+                <li><a href="#">Mục 2</a></li>
+                <li><a href="#">Mục 3</a></li>
+            </ul>
+        </aside>
+         -->
+
+        <!-- Phần content bên phải -->
+        <div class="main-content flex-grow-1">
+            <div class="container">
+                <main role="main" class="pb-3">
+                    @RenderSection("Content", required: false)
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
     </div>
+
 
     <footer>
         <div class="footer-container">

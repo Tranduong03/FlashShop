@@ -8,6 +8,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+   
 }
     .navbar p {
         margin-left: -30%;
@@ -178,6 +179,10 @@ footer {
     color: #fff;
     padding: 20px 0 0 0;
     margin: 0;
+    clear: both;
+    text-align: center;
+    width: 100%;
+    
 }
 
 .footer-container {
@@ -234,5 +239,77 @@ footer {
     font-size: 14px;
 /*    border: 3px solid red;*/
 }
+
+/* Định dạng Header */
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: #fff; /* Nền trắng cho header */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+/*
+    CSS CHO SIDEBAR
+*/
+.sidebar{
+    margin-top: 0;
+    padding-top: 0;
+}
+
+/* Container chính với khoảng trống ở phía trên cho header */
+.main-container {
+    display: flex;
+    margin-top: 80px; /* Điều chỉnh cho đúng chiều cao của header */
+}
+
+/* Sidebar */
+.sidebar {              
+    width: 250px;
+    position: sticky;
+    top: 80px; /* Điều chỉnh đúng chiều cao dưới header */
+    align-self: flex-start;
+    background-color: #f8f9fa;
+    padding-top: 20px;
+    height: calc(100vh - 80px); /* Chiều cao của viewport trừ header */
+}
+
+.sidebar-menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+    .sidebar-menu li {
+        margin: 30px 0 0 30px;
+    }
+
+        .sidebar-menu li a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            .sidebar-menu li a:hover {
+                color: #007bff;
+            }
+
+/* Content bên phải, tránh tràn */
+.main-content {
+    padding: 20px;
+    width: calc(100% - 250px); /* Chiều rộng điều chỉnh để vừa khung */
+    overflow: auto;
+}
+
+#sidebar_home{
+   
+}
+
+#sidebar_admin{
+    
+}
+/*
+    END SIDEBAR
+*/
 
 

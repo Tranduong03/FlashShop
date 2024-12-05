@@ -18,9 +18,15 @@ html {
 }
 
 
+
 /*
     css cho trang home
 */
+#bannerCarousel {
+    margin-top: 80px; /* Điều chỉnh giá trị này cho phù hợp với chiều cao của header */
+    margin-bottom: 0;
+}
+
 .carousel-inner {
     width: 100%; /* Chiều rộng toàn màn hình */
     
@@ -208,3 +214,49 @@ span {
     align-items: center;
     text-align: center;
 }
+.contentAdmin {
+    padding-top: 50px; /* Đẩy nội dung xuống dưới header */
+    height: calc(100% - 50px); /* Điều chỉnh chiều cao nếu cần */
+}
+/* CSS SIDEBAR */
+
+/* Xóa dấu chấm của ul li */
+#sidebar_admin .sidebar-menu {
+    list-style-type: none; /* Xóa dấu chấm */
+    padding: 10px; /* Xóa khoảng cách mặc định */
+    margin: 0;
+}
+
+    #sidebar_admin .sidebar-menu li {
+        margin: 10px 0;
+    }
+
+    /* Xóa dấu gạch chân của thẻ a */
+    #sidebar_admin .sidebar-menu a {
+        text-decoration: none; /* Xóa dấu gạch chân */
+        color: #333; /* Màu chữ (tùy chỉnh) */
+        display: flex;
+        align-items: center;
+    }
+    /* Khi hover vào mục li thì hiện background màu xanh lá nhạt */
+    #sidebar_admin .sidebar-menu li:hover > a {
+        background-color: #d5f5d5; /* Màu xanh lá nhạt */
+    }
+        #sidebar_admin .sidebar-menu a img {
+            margin-right: 10px; /* Khoảng cách giữa icon và text */
+        }
+
+    /* Định dạng cho các mục con trong ul */
+    #sidebar_admin .sidebar-menu ul {
+        list-style-type: none; /* Xóa dấu chấm */
+        padding-left: 20px; /* Tạo khoảng cách thụt vào cho mục con */
+        display: none; /* Ẩn các mục con ban đầu */
+        
+    }
+
+    /* Hiện các mục con khi hover hoặc nhấn vào danh sách sách */
+    #sidebar_admin .sidebar-menu li:hover > ul {
+        display: block; /* Hiện các mục con khi hover */
+    }
+
+    /* END SIDEBAR */

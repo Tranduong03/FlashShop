@@ -1,9 +1,30 @@
 ﻿
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="contentAdmin">
+@section Sidebar {
 
+    <!-- Sidebar bên trái -->
+    <aside class="sidebar" id="sidebar_admin">
+        <ul class="sidebar-menu">
+            <li><a href="#"><img src="~/images/add.png" />   Dashboard</a></li>
+            <li><a href="#"><img src="~/images/revenue.png"/>   Doanh thu</a></li>
+                <li><a href="#"><p style="display:flex"><img src="~/images/square.png" />   Danh sách sách</p></a>
+                <ul>
+                    <li><a href="#">    Thêm sách mới</a></li>
+                    <li><a href="#">    Thể loại sách</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><img src="~/images/report.png" />   Danh sách đơn hàng</a></li>
+            <li><a href="#"><img src="~/images/employee-engagement.png"/>   Danh sách khách hàng</a></li>
+            <li><a href="#"><img src="~/images/customer-care.png"/> Hỗ trợ và phản hồi</a></li>
+        </ul>
+    </aside>
+}
+@section Content{
+    <!--
 <div class="group-index">
     <div class="group-customer">
         <a href="#">
@@ -37,3 +58,6 @@
     </div>
 </div>
 
+    -->
+}
+</div>
