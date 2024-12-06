@@ -1,5 +1,6 @@
 ﻿using FlashShop.Models;
 using FlashShop.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace FlashShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class BookController : Controller
     {
         private readonly DataContext _dataContext;
