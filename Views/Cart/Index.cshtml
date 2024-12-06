@@ -76,7 +76,7 @@
 							</td>
 							@if (User.Identity?.IsAuthenticated ?? false) 
 							{
-								<td> <a class="btn btn-success btn-sm" style="font-size: 16px;" asp-controller="Cart" asp-action="Checkout"> Thanh toán </a> </td>
+								<td> <a class="btn btn-success btn-sm" style="font-size: 16px;" asp-controller="Checkout" asp-action="Checkout"> Thanh toán </a> </td>
 							} 
 							else 
 							{
