@@ -1,6 +1,7 @@
 ﻿using FlashShop.Models;
 using FlashShop.OtherProcessing;
 using FlashShop.Repository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static System.Net.WebRequestMethods;
@@ -13,14 +14,14 @@ namespace FlashShop.Controllers
 		private readonly IConfiguration _configuration;
 
 		// Constructor duy nhất để khởi tạo DataContext
-		public AccountController(DataContext context, IConfiguration configuration)
+		public AccountController( DataContext context, IConfiguration configuration)
 		{
 			_context = context;
 			_configuration = configuration;
 		}
 
 		[HttpGet]
-		public IActionResult Login()
+		public IActionResult Login(string ReturnUrl)
 		{
 			Console.WriteLine("LoginPage");
 			return View(new AccountCheck());
@@ -103,6 +104,7 @@ namespace FlashShop.Controllers
                     Console.WriteLine(error.ErrorMessage);
                 }
             }
+
 
             Console.WriteLine("LoginValid Fail");
 

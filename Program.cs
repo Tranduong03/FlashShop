@@ -1,4 +1,4 @@
-using FlashShop.Models;
+﻿using FlashShop.Models;
 using FlashShop.OtherProcessing;
 using FlashShop.Repository;
 using Microsoft.AspNetCore.Identity;
@@ -28,6 +28,7 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddIdentity<AppUserModel, IdentityRole>()
     .AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
+
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -65,7 +66,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-//app.UseAuthentication();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
