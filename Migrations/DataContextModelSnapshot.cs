@@ -64,6 +64,9 @@ namespace FlashShop.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -89,11 +92,11 @@ namespace FlashShop.Migrations
 
             modelBuilder.Entity("FlashShop.Models.BookModel", b =>
                 {
-                    b.Property<long>("BookId")
+                    b.Property<int>("BookId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("BookId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookId"));
 
                     b.Property<string>("Author")
                         .HasMaxLength(100)
@@ -181,8 +184,6 @@ namespace FlashShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookId");
-
                     b.ToTable("OrdersDetails");
                 });
 
@@ -227,38 +228,6 @@ namespace FlashShop.Migrations
                     b.HasKey("PublisherId");
 
                     b.ToTable("Publisher");
-                });
-
-            modelBuilder.Entity("FlashShop.Models.Users", b =>
-                {
-                    b.Property<int>("userID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("userID"));
-
-                    b.Property<string>("account")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("password")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<bool>("typeUser")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("userName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("userID");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -411,17 +380,6 @@ namespace FlashShop.Migrations
                     b.Navigation("Categories");
 
                     b.Navigation("Publisher");
-                });
-
-            modelBuilder.Entity("FlashShop.Models.OrderDetails", b =>
-                {
-                    b.HasOne("FlashShop.Models.BookModel", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

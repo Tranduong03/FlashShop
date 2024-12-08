@@ -14,12 +14,14 @@ namespace FlashShop.Controllers
 		// TD write on 5/12
 		private UserManager<AppUserModel> _userManager;
 		private SignInManager<AppUserModel> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-		// TD write on 5/12
-		public AccountController(SignInManager<AppUserModel> signInManager, UserManager<AppUserModel> userManager)
+        // TD write on 5/12
+        public AccountController(SignInManager<AppUserModel> signInManager, RoleManager<IdentityRole> roleManager, UserManager<AppUserModel> userManager)
 		{
 			_signInManager = signInManager;
-			_userManager = userManager;
+            _roleManager = roleManager;
+            _userManager = userManager;
 		}
 
 		public IActionResult Login(string returnUrl)
@@ -52,30 +54,43 @@ namespace FlashShop.Controllers
 			return View();
 		}
 
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Register(Users u)
-		{
-			if (ModelState.IsValid)
-			{
-				AppUserModel newUser = new AppUserModel { UserName = u.userName, Email = u.email };
-				IdentityResult rs = await _userManager.CreateAsync(newUser, u.password);
-				if (rs.Succeeded)
-				{
-					TempData["success"] = $"Đăng ký tài khoản thành công";
-					return RedirectToAction("Login", "Account");
-				}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(UserModel u)
+        {
+            if (ModelState.IsValid)
+            {
+                AppUserModel newUser = new AppUserModel { UserName = u.userName, Email = u.email };
+                IdentityResult rs = await _userManager.CreateAsync(newUser, u.password);
+                if (rs.Succeeded)
+                {
+                    // Gán role mặc định "User" cho tài khoản
+                    var addToRoleResult = await _userManager.AddToRoleAsync(newUser, "user");
+                    if (addToRoleResult.Succeeded)
+                    {
+                        TempData["success"] = $"Đăng ký tài khoản thành công";
+                        return RedirectToAction("Login", "Account");
+                    }
 
-				foreach (IdentityError error in rs.Errors)
-				{
-					ModelState.AddModelError("", error.Description);
-				}
-			}
-			//TempData["error"] = $"Tài khoản {u.userName} đã tồn tại";
-			return View();
-		}
+                    // Nếu lỗi khi thêm role
+                    foreach (IdentityError error in addToRoleResult.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
 
-		public async Task<IActionResult> Logout(string returnUrl = "/")
+                // Nếu lỗi khi tạo tài khoản
+                foreach (IdentityError error in rs.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+            return View();
+        }
+
+
+
+        public async Task<IActionResult> Logout(string returnUrl = "/")
 		{
 			await _signInManager.SignOutAsync();
 			return Redirect(returnUrl);

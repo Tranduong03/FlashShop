@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "Danh sách người dùng";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/adminSite.css" />
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>         
+            <th scope="col">Tên người dùng</th>            
+            <th scope="col">Email</th>
+            <th scope="col">Mật khẩu băm</th>
+            <th scope="col">Quyền truy cập</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var usersWithRoles in Model)
+        {
+            <tr>
+                <th scope="row">@usersWithRoles.User.Id</th>
+                <td>@usersWithRoles.User.UserName</td>
+                <td>@usersWithRoles.User.Email</td>
+                <td>@usersWithRoles.User.PasswordHash</td>
+                <td>@usersWithRoles.RoleName</td>
+                <td>
+                    <div class="action-buttons">
+                        <a asp-action="Edit" asp-controller="User" asp-route-id="@usersWithRoles.User.Id" class="btn btn-warning btn-sm">
+                            Sửa
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
