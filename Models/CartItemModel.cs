@@ -2,7 +2,7 @@
 {
     public class CartItemModel
     {
-        public long BookId { get; set; }
+        public int BookId { get; set; }
         public string Title { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }

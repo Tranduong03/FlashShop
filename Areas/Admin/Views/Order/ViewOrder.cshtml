@@ -1,0 +1,63 @@
+﻿@model IEnumerable<OrderDetails>
+
+@{
+    ViewData["Title"] = "Đơn hàng";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/adminSite.css" />
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Mã đơn hàng</th>
+            <th scope="col">Người đặt</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Số lượng</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.Id</th>
+                <td>@item.OrderCode</td>
+                <td>@item.UserName</td>
+                <td>@item.Price</td>
+                <td>@item.Quantity</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmLabel">Xác nhận xóa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xóa đơn hàng này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <a id="deleteButton" href="#" class="btn btn-danger">Xóa</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function showDeleteModal(deleteUrl) {
+            var deleteButton = document.getElementById('deleteButton');
+            deleteButton.setAttribute('href', deleteUrl);
+            var modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+            modal.show();
+        }
+    </script>
+}

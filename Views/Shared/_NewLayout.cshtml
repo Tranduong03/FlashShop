@@ -103,7 +103,7 @@
 									<li><a asp-controller="Account" asp-action="Logout"><i class="fa fa-sign-out"></i> Hi, @User.Identity.Name </a></li>
 									<li><a href="@Url.Action("Index", "Book", new {area = "Admin"})"><i class="fa fa-lock"></i> Admin </a></li>
 									<li><a href="#"><i class="fa fa-star"></i> Wishlist </a></li>
-									<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout </a></li>
+									<li><a href="@Url.Action("Index", "Order")"><i class="fa fa-crosshairs"></i> Checkout </a></li>
 								}
 								else
 								{
@@ -156,9 +156,14 @@
 						</div>
 					</div>
 					<div class="col-sm-3">
-						<div class="search_box pull-right">
-							<input type="text" placeholder="Search" />
-						</div>
+						<form class="d-flex" asp-controller="Home" asp-action="Search" method="post">
+							<div class="search_box pull-right">
+								<input placeholder="  Tìm sản phẩm..." type="text" name="searchTerm" />
+								<button class="btn btn-warning" type="submit">
+									Search
+								</button>
+							</div>
+						</form>						
 					</div>
 				</div>
 			</div>

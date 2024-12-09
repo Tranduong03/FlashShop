@@ -71,5 +71,14 @@ namespace FlashShop.Controllers
 				return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 			}         
         }
+
+        public async Task<IActionResult> Search(string searchTerm)
+        {
+            var products = await _dataContext.Books
+                .Where(p => p.Title.Contains(searchTerm))
+                .ToListAsync();
+            ViewBag.Keyword = searchTerm;
+            return View(products);
+        }
     }
 }
