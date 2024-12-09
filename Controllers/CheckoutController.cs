@@ -16,7 +16,7 @@ namespace FlashShop.Controllers
 			_dataContext = context;
 		}
 		
-		public IActionResult Checkout()
+		public async Task<IActionResult> Checkout()
 		{
 			var userEmail = User.FindFirstValue(ClaimTypes.Email);
 			if (userEmail == null)
@@ -46,9 +46,10 @@ namespace FlashShop.Controllers
 					_dataContext.SaveChanges();
 				}
 				HttpContext.Session.Remove("Cart");
-				TempData["success"] = "Checkout thành công, vui lòng chờ duyệt đơn hàng";
+				TempData["success"] = "Checkout thành công, vui lonhg chờ duyệt đơn hàng";
 				return RedirectToAction("Index", "Cart");
 			}
+			return View();
 		} 
 	}
 }
