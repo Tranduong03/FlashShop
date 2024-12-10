@@ -57,7 +57,7 @@ namespace FlashShop.Controllers
             return Redirect(Request.Headers["Referer"].ToString());
         }
 
-        public async Task<IActionResult> Decrease(int id)
+        public IActionResult Decrease(int id)
         {
             List<CartItemModel> cart = HttpContext.Session.GetJson<List<CartItemModel>>("Cart");
 
@@ -65,16 +65,16 @@ namespace FlashShop.Controllers
             if (cartItem.Quantity > 1)
             {
                 cartItem.Quantity -= 1;
-            }  
+            }
             else
             {
                 cart.RemoveAll(b => b.BookId == id);
             }
 
-            if (cart.Count == 0) 
+            if (cart.Count == 0)
             {
                 HttpContext.Session.Remove("Cart");
-            } 
+            }
             else
             {
                 HttpContext.Session.SetJson("Cart", cart);
@@ -83,7 +83,7 @@ namespace FlashShop.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Increase(int id)
+        public IActionResult Increase(int id)
         {
             List<CartItemModel> cart = HttpContext.Session.GetJson<List<CartItemModel>>("Cart");
 

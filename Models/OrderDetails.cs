@@ -8,6 +8,8 @@ namespace FlashShop.Models
         public string UserName { get; set; }
         public string OrderCode { get; set; }
         public int BookId { get; set; }
+
+        [Column(TypeName = "decimal(18,4)")]
         public decimal Price { get; set; }
         public int Quantity { get; set; }
 
