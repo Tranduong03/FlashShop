@@ -16,6 +16,8 @@
             <th scope="col">Người đặt</th>
             <th scope="col">Ngày đặt hàng</th>
             <th scope="col">Tình trạng đơn</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -40,13 +42,17 @@
                     <div class="action-buttons">
                         <a asp-action="ViewOrder" asp-controller="Order" asp-route-ordercode="@item.OrderCode" class="btn btn-warning btn-sm">
                             Chi tiết
-                        </a>
+                        </a>                      
+                    </div>
+                </td>
+                <td>
+                    <div class="action-buttons">
                         <a href="javascript:void(0)"
                            class="btn btn-danger btn-sm"
                            onclick="showDeleteModal('@Url.Action("Delete", new { id = item.Id })')">
                             Xóa
                         </a>
-                    </div>
+                    </div>              
                 </td>
             </tr>
         }

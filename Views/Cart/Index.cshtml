@@ -2,7 +2,7 @@
 @model CartItemViewModel
 
 @{
-	ViewData["Title"] = "Details Book";
+	ViewData["Title"] = "Giỏ Hàng";
 	Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
 
@@ -80,7 +80,7 @@
 							} 
 							else 
 							{
-								<td> <a class="btn btn-success btn-sm" style="font-size: 16px;" asp-controller="Account" asp-action="Login"> Thanh toán </a> </td>
+								<td> <a class="btn btn-success btn-sm" style="font-size: 16px;" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Context.Request.Path"> Thanh toán </a> </td>
 							}							
 						</tr>
 					}

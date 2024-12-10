@@ -5,7 +5,9 @@ using FlashShop.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using static System.Net.WebRequestMethods;
+
 
 namespace FlashShop.Controllers
 {
@@ -16,17 +18,103 @@ namespace FlashShop.Controllers
 		private SignInManager<AppUserModel> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
+        // TD write 9/12
+        private readonly DataContext _dataContext;
+        private readonly IConfiguration _configuration;
+
         // TD write on 5/12
-        public AccountController(SignInManager<AppUserModel> signInManager, RoleManager<IdentityRole> roleManager, UserManager<AppUserModel> userManager)
-		{
-			_signInManager = signInManager;
+        public AccountController(SignInManager<AppUserModel> signInManager, RoleManager<IdentityRole> roleManager, UserManager<AppUserModel> userManager, DataContext context, IConfiguration configuration)
+        {
+            _signInManager = signInManager;
             _roleManager = roleManager;
             _userManager = userManager;
-		}
+
+            _dataContext = context;
+            _configuration = configuration;
+        }
 
 		public IActionResult Login(string returnUrl)
 		{
 			return View(new LoginViewModel { ReturnUrl = returnUrl });
+		}
+
+		public IActionResult Forgot()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> SendMail(AppUserModel user)
+		{
+			var checkMail = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
+			if (checkMail == null)
+			{
+				TempData["error"] = $"Không tìm thấy email {user.Email}";
+				return RedirectToAction("Forgot", "Account");
+			}
+			else
+			{
+				string token = Guid.NewGuid().ToString();
+				checkMail.Token = token;
+				_dataContext.Update(checkMail);
+				await _dataContext.SaveChangesAsync();
+				var receiver = checkMail.Email;
+				var subject = "Change password for user " + checkMail.Email;
+				var message = "Click on link to change password " +
+					"'" + $"{Request.Scheme}://{Request.Host}/Account/NewPass?email="
+					+ checkMail.Email + "&token=" + token + "'";
+                var emailService = new EmailService(_configuration);
+				await emailService.SendEmailAsync(receiver, subject, message);
+            }
+			TempData["success"] = $"Hãy kiểm tra email {user.Email} của bạn";
+			return RedirectToAction("Forgot", "Account");
+		}
+
+		public async Task<IActionResult> NewPass(AppUserModel user, string token)
+		{
+			var checkuser = await _userManager.Users
+                .Where(u => u.Email == user.Email)
+				.Where(u => u.Token == user.Token).FirstOrDefaultAsync();
+
+			if (checkuser != null) 
+			{
+                ViewBag.Email = checkuser.Email;
+				ViewBag.Token = token;
+            }
+			else
+			{
+				TempData["error"] = "Email không tìm thấy hoặc token không chính xác";
+				return RedirectToAction("Forgot", "Account");
+			}
+
+			return View();
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> UpdateNewPassword(AppUserModel user, string token)
+		{
+			var checkuser = await _userManager.Users
+				.Where(u => u.Email == user.Email)
+				.Where(u => u.Token == user.Token).FirstOrDefaultAsync();
+
+			if (checkuser != null)
+			{ 
+				string newtoken = Guid.NewGuid().ToString();
+				var passwordHasher = new PasswordHasher<AppUserModel>();
+				var passwordHash = passwordHasher.HashPassword(checkuser, user.PasswordHash);
+
+				checkuser.PasswordHash = passwordHash;
+				checkuser.Token = newtoken; 
+
+				await _userManager.UpdateAsync(checkuser);
+				TempData["success"] = "Cập nhật mật khẩu thành công.";
+				return RedirectToAction("Login", "Account");
+			}
+			else
+			{
+				TempData["error"] = "Email không tồn tại hoặc token không hợp lệ";
+				return RedirectToAction("Forgot", "Account");
+			}
 		}
 
 		[HttpPost]
@@ -41,7 +129,6 @@ namespace FlashShop.Controllers
 					TempData["success"] = $"Đăng nhập tài khoản {LVM.userName} thành công.";
 					return Redirect(LVM.ReturnUrl ?? "/");
 				}
-				//TempData["error"] = $"Thông tin đăng nhập không chính xác.";
 				ModelState.AddModelError("", "Thông tin đăng nhập không chính xác.");
 			}
 			//TempData["error"] = $"Thông tin đăng nhập không chính xác.";
@@ -88,8 +175,6 @@ namespace FlashShop.Controllers
             return View();
         }
 
-
-
         public async Task<IActionResult> Logout(string returnUrl = "/")
 		{
 			await _signInManager.SignOutAsync();
@@ -106,70 +191,70 @@ namespace FlashShop.Controllers
 		//	_configuration = configuration;
 		//}
 
-		//[HttpGet]
-		//public IActionResult Login()
-		//{
-		//	Console.WriteLine("LoginPage");
-		//	return View(new AccountCheck());
-		//}
+        //[HttpGet]
+        //public IActionResult Login()
+        //{
+        //	Console.WriteLine("LoginPage");
+        //	return View(new AccountCheck());
+        //}
 
-		//[HttpGet]
-		//public IActionResult Register()
-		//{
-		//	return View();
-		//}
+        //[HttpGet]
+        //public IActionResult Register()
+        //{
+        //	return View();
+        //}
 
-		//[HttpGet]
-		//public IActionResult Forgot()
-		//{
-		//	return View();
-		//}
+        //[HttpGet]
+        //public IActionResult Forgot()
+        //{
+        //	return View();
+        //}
 
-		//[HttpGet]
-		//public IActionResult InputOTP()
-		//{
-		//	return View();
-		//}
+        //[HttpGet]
+        //public IActionResult InputOTP()
+        //{
+        //	return View();
+        //}
 
-		//[HttpPost]
-		//[ValidateAntiForgeryToken]
-		//public async Task<IActionResult> Register(Users customer)
-		//{
-		//	if (ModelState.IsValid)
-		//	{
-		//		// Kiểm tra nếu tài khoản đã tồn tại
-		//		var existingAccount = await _context.Users
-		//			.FirstOrDefaultAsync(c => c.account == customer.account);
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Register(Users customer)
+        //{
+        //	if (ModelState.IsValid)
+        //	{
+        //		// Kiểm tra nếu tài khoản đã tồn tại
+        //		var existingAccount = await _context.Users
+        //			.FirstOrDefaultAsync(c => c.account == customer.account);
 
-		//		if (existingAccount != null)
-		//		{
-		//			TempData["error"] = $"Tài khoản hoặc tên đăng nhập đã tồn tại";
-		//			ModelState.AddModelError("Account", "Account already exists.");
-		//			return View(customer); // Hiển thị lại form với thông báo lỗi
-		//		}
+        //		if (existingAccount != null)
+        //		{
+        //			TempData["error"] = $"Tài khoản hoặc tên đăng nhập đã tồn tại";
+        //			ModelState.AddModelError("Account", "Account already exists.");
+        //			return View(customer); // Hiển thị lại form với thông báo lỗi
+        //		}
 
-		//		// Lưu thông tin người dùng mới vào CSDL
-		//		_context.Users.Add(customer);
-		//		await _context.SaveChangesAsync();
-		//		TempData["success"] = $"Đăng ký tài khoản thành công";
+        //		// Lưu thông tin người dùng mới vào CSDL
+        //		_context.Users.Add(customer);
+        //		await _context.SaveChangesAsync();
+        //		TempData["success"] = $"Đăng ký tài khoản thành công";
 
-		//		// Chuyển hướng tới trang khác sau khi đăng ký thành công
-		//		return RedirectToAction("Login", "Account");
-		//	}
+        //		// Chuyển hướng tới trang khác sau khi đăng ký thành công
+        //		return RedirectToAction("Login", "Account");
+        //	}
 
-		//	// Nếu ModelState không hợp lệ, hiển thị lại form đăng ký
-		//	return View(customer);
-		//}
+        //	// Nếu ModelState không hợp lệ, hiển thị lại form đăng ký
+        //	return View(customer);
+        //}
 
-		//[HttpPost]
-		//[ValidateAntiForgeryToken]
-		//public async Task<IActionResult> Login(AccountCheck checkAcc)
-		//{
-		//	if (ModelState.IsValid)
-		//	{
-		//		// Tìm tài khoản trong cơ sở dữ liệu
-		//		var user = await _context.Users	
-		//			.FirstOrDefaultAsync(c => c.account == checkAcc.account && c.password == checkAcc.password);
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Login(AccountCheck checkAcc)
+        //{
+        //	if (ModelState.IsValid)
+        //	{
+        //		// Tìm tài khoản trong cơ sở dữ liệu
+        //		var user = await _context.Users	
+        //			.FirstOrDefaultAsync(c => c.account == checkAcc.account && c.password == checkAcc.password);
 
 		//		if (user != null)
 		//		{
@@ -195,9 +280,9 @@ namespace FlashShop.Controllers
 
 		//          Console.WriteLine("LoginValid Fail");
 
-		//	// Nếu ModelState không hợp lệ, hiển thị lại form đăng nhập
-		//	return View(checkAcc);
-		//}
+        //	// Nếu ModelState không hợp lệ, hiển thị lại form đăng nhập
+        //	return View(checkAcc);
+        //}
 
 		//[HttpPost]
 		//[ValidateAntiForgeryToken]
@@ -209,7 +294,7 @@ namespace FlashShop.Controllers
 		//		return View();
 		//	}
 
-		//	var emailvalid = await _context.Users.FirstOrDefaultAsync(c => c.email == email);
+        //	var emailvalid = await _context.Users.FirstOrDefaultAsync(c => c.email == email);
 
 		//	if (emailvalid != null)
 		//          {

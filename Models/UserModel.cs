@@ -12,7 +12,7 @@ namespace FlashShop.Models
         [Required(ErrorMessage = "Vui lòng nhập Tên đăng nhập")]
         public string userName { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập Email")]
+        [Required(ErrorMessage = "Vui lòng nhập Email.")]
         [EmailAddress]
         public string email { get; set; }
         [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
@@ -23,7 +23,7 @@ namespace FlashShop.Models
         [NotMapped] // Không lưu trường này vào cơ sở dữ liệu
         [Required(ErrorMessage = "Please confirm your password.")]
         [DataType(DataType.Password)]
-        [Compare("password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("password", ErrorMessage = "Xác nhận mật khẩu không khớp.")]
         public string ConfirmPassword { get; set; }
     }
 }
