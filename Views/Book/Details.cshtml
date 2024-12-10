@@ -1,5 +1,5 @@
 ﻿
-@model BookModel
+@model BookDetailsViewModel
 
 @{
 	ViewData["Title"] = "Details Book";
@@ -20,7 +20,7 @@
             <!--product-details-->
             <div class="col-sm-5">
                 <div class="view-product">
-                    <img src="~/images/book/@Model.ImgLink" alt="@Model.Description" />
+                    <img src="~/images/book/@Model.BookDetails.ImgLink" alt="@Model.BookDetails.Description" />
                     <h3>ZOOM</h3>
                 </div>
                 <div id="similar-product" class="carousel slide" data-ride="carousel">
@@ -49,17 +49,17 @@
                 <div class="product-information">
                     <!--/product-information-->
                     <!--
-                        <img src="~/images/book/@Model.ImgLink" alt="@Model.Description" />
+                        <img src="~/images/book/@Model.BookDetails.ImgLink" alt="@Model.BookDetails.Description" />
                     -->
                     
-                    <h2>@Model.Title</h2>
+                    <h2>@Model.BookDetails.Title</h2>
                     <p>Web ID: 1089772</p>
                     <!--
-                        <img src="~/images/book/@Model.ImgLink" alt="@Model.Description" />
+                        <img src="~/images/book/@Model.BookDetails.ImgLink" alt="@Model.BookDetails.Description" />
                     -->
                     <span>
-                        <span>US $@Model.Price</span>
-                        <label>Quantity: @Model.Quantity</label>
+                        <span>@Model.BookDetails.Price.ToString("#,##0 Đ")</span>
+                        <label>Quantity: @Model.BookDetails.Quantity</label>
                         <input type="text" value="3" />
                         <button type="button" class="btn btn-fefault cart">
                             <i class="fa fa-shopping-cart"></i>
@@ -68,8 +68,8 @@
                     </span>
                     <p><b>Availability:</b> In Stock</p>
                     <p><b>Condition:</b> New</p>
-                    <p><b>Nhà xuất bản: </b> @Model.Publisher.PublisherName</p>
-                    <p><b>Thể loại sách: </b> @Model.Categories.CategoryName </p>
+                    <p><b>Nhà xuất bản: </b> @Model.BookDetails.Publisher.PublisherName</p>
+                    <p><b>Thể loại sách: </b> @Model.BookDetails.Categories.CategoryName </p>
                     <a href=""><img src="images/product-details/share.png" class="share img-responsive" alt="" /></a>
                 </div><!--/product-information-->
             </div>
@@ -87,8 +87,8 @@
             </div>
             <div class="tab-content">
                 <div class="tab-pane fade active in" id="details">
-                   
-                   @Model.Description
+
+                    @Model.BookDetails.Description
                     
                 </div>
 
@@ -204,14 +204,19 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                         <p><b>Write Your Review</b></p>
 
-                        <form action="#">
+                        <form asp-action="CommentBook" asp-controller="Book" method="post">
                             <span>
-                                <input type="text" placeholder="Your Name" />
-                                <input type="email" placeholder="Email Address" />
+                                <input type="hidden" asp-for="@Model.BookDetails.BookId" name="Id"/>
+                                <input type="hidden" name="Rating" value="4" />
+                                <input asp-for="@Model.Name" type="text" placeholder="Your Name" />
+                                <span asp-validation-for="@Model.Name" class="text-danger" />
+                                <input asp-for="@Model.Email" type="email" placeholder="Email Address" />
+                                <span asp-validation-for="@Model.Email" class="text-danger" />
                             </span>
-                            <textarea name=""></textarea>
+                            <textarea asp-for="Comment" placeholder="Write your comment here"></textarea>
+                            <span asp-validation-for="Comment" class="text-danger"></span>
                             <b>Rating: </b> <img src="images/product-details/rating.png" alt="" />
-                            <button type="button" class="btn btn-default pull-right">
+                            <button type="submit" class="btn btn-default pull-right">
                                 Submit
                             </button>
                         </form>
@@ -228,81 +233,27 @@
             <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="item active">
-                        <div class="col-sm-4">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
-                                        <img src="images/home/recommend1.jpg" alt="" />
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
-                                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                        @foreach (var relatedBooks in ViewBag.RelatedBooks as IEnumerable<BookModel>)
+                        {
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <a asp-action="Details" asp-controller="Book" asp-route-id="@relatedBooks.BookId">
+                                                <img src="~/images/book/@relatedBooks.ImgLink" />
+                                                <h2>@relatedBooks.Price.ToString("#,##0 Đ")</h2>
+                                                <p>@relatedBooks.Title</p>
+                                                <!--
+                                                    <p> Danh mục: @relatedBooks.Categories.CategoryName </p>
+                                                    <p> Nhà xuất bản: @relatedBooks.Publisher.PublisherName </p>
+                                                -->
+                                            </a>
+                                            <a class="btn btn-default add-to-cart" asp-action="Add" asp-controller="Cart" asp-route-id="@relatedBooks.BookId"><i class="fa fa-shopping-cart"> Giỏ hàng </i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
-                                        <img src="images/home/recommend2.jpg" alt="" />
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
-                                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
-                                        <img src="images/home/recommend3.jpg" alt="" />
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
-                                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="col-sm-4">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
-                                        <img src="images/home/recommend1.jpg" alt="" />
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
-                                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
-                                        <img src="images/home/recommend2.jpg" alt="" />
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
-                                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
-                                        <img src="images/home/recommend3.jpg" alt="" />
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
-                                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        }
                 </div>
                 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
                     <i class="fa fa-angle-left"></i>

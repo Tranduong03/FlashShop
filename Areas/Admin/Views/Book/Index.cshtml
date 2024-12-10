@@ -42,7 +42,7 @@
             <tr>
                 <th scope="row">@item.BookId</th>
                 <td class="title-column">@item.Title</td>
-                <td>@item.Price</td>
+                <td>@item.Price.ToString("#,##0 Đ")</td>
                 <td class="quantity-column">@item.Quantity</td>
                 <td><img src="~/images/book/@item.ImgLink" width="95" alt="Book Image" /></td>
                 <td class="description-column">
