@@ -28,7 +28,8 @@
                 <td>@item.OrderCode</td>
                 <td>@item.UserName</td>
                 <td>@item.dateTime</td>
-                <td>@if (@item.Status==1)
+                <td>
+                    @if (@item.Status==1)
                     {
                         <span class="text text-success">Đơn hàng mới</span>
                     }

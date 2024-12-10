@@ -46,7 +46,7 @@ namespace FlashShop.Controllers
                     _dataContext.SaveChanges();
                 }
                 HttpContext.Session.Remove("Cart");
-                TempData["success"] = "Checkout thành công, vui lonhg chờ duyệt đơn hàng";
+                TempData["success"] = "Đặt hàng thành công, vui lòng chờ duyệt đơn hàng";
                 return RedirectToAction("Index", "Cart");
             }
         }
