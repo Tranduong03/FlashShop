@@ -30,7 +30,7 @@ namespace FlashShop.Controllers
                 .Include(b => b.Publisher) 
                 .ToList();
 
-            const int pageSize = 3;
+            const int pageSize = 6;
 
             if (pg < 1)
             {
