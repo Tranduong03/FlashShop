@@ -1,0 +1,144 @@
+﻿
+/* BẢNG HIỂN THỊ SÁCH TRANG INDEX */
+
+.table > :not(caption) > * > * {
+    padding: .15rem .2rem;
+    background-color: var(--bs-table-bg);
+    border-bottom-width: 1px;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color:#F2FBF6;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #fff;
+}
+
+.table .btn-warning {
+    border: none;
+    color: #e5f6eb;
+}
+
+.action-buttons .edit {
+    background-color: orange;
+}
+    .action-buttons .edit:hover {
+        background-color: darkorange; 
+        border-color: darkorange;
+    }
+
+.action-buttons .delete {
+    background-color: #e81f1f;
+}
+    .action-buttons .delete:hover {
+        background-color: darkred; 
+        border-color: darkred;
+    }
+
+.action-buttons {
+    display: flex;
+    flex-direction: column; 
+    gap: 10px;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.action-buttons .btn {
+    width: 100%; 
+}
+
+
+.table .description-column {
+    max-width: 300px !important;  
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+.table .title-column {
+    max-width: 180px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.table .price-column {
+    text-align: center;
+}
+
+
+/* BẢNG HIỂN THỊ SÁCH TRANG CREATE */
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 3px;
+    font-size: 15px;
+    margin-top: 3px;
+}
+
+    .form-control:hover, .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+    }
+
+label {
+    font-weight: bold;
+    color: #343a40;
+}
+
+.text-danger {
+    color: #e74c3c;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    width: 100%;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+a.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    display: inline-block;
+}
+
+    a.btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+.row {
+    margin-bottom: 20px;
+}
+
+textarea.form-control {
+    height: 150px;
+    resize: vertical;
+}
+
+.form-group button {
+    margin-top: 15px;
+}
+
+/* TRANG USER */
+.table .Hashpass {
+    max-width: 500px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

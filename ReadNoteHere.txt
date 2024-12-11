@@ -1,0 +1,13 @@
+﻿1. Sửa chuỗi kết nối ở appsettings.json, tự tạo lại database và kết nối cho phù hợp
+
+2. Tôi kết nối CSDL theo cách của video đã được ghim trên nhóm, vui lòng xem kĩ video hoặc nếu không 
+chạy được thì lên phòng tự học lúc 21h, tôi sẽ lên đó. Hoặc có thể nhắn tin zalo mình đến liền
+
+3. Tải các gói cần thiết về entityframework trong nugetpackage
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Design
+Microsoft.EntityFrameworkCore.Tools
+Microsoft.EntityFrameworkCore.SqlServer
+
+--- 18/10/2024 ---
+Trường lấy lại mật khẩu được thêm vào

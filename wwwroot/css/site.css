@@ -1,0 +1,217 @@
+﻿html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+
+/*
+    css cho trang home
+*/
+.carousel-inner {
+    width: 100%; /* Chiều rộng toàn màn hình */
+    
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 400px;
+}
+
+
+
+span {
+    font-weight: bold;
+}
+
+.center-text {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin-top: 20px;
+    text-align: center;
+    color: #A0D6B4;
+}
+
+.info {
+    color: #A0D6B4;
+}
+
+.row {
+    margin-right: -10px;
+    margin-left: -10px;
+    margin-top: 15px;
+}
+
+.section_services .promo-box .promo-item {
+    text-align: center;
+    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    min-height: 85px;
+    padding-top: 7px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+}
+
+.book-section {
+    margin-top: 15px;
+}
+
+/* Định dạng menu */
+.book-menu {
+    font-weight: bold;
+}
+
+    .book-menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: space-around;
+        background-color: #A0D6B4;
+    }
+
+    .book-menu ul li {
+        padding: 10px;
+    }
+
+        .book-menu ul li {
+            padding: 10px;
+        }
+
+            .book-menu ul li a {
+                color: white;
+                text-decoration: none;
+            }
+
+                .book-menu ul li a:hover {
+                    color: #ddd;
+                }
+
+.carousel-item .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+/* Định dạng phần danh sách sách */
+.book-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+/* Định dạng từng sách (book-item) */
+.book-item {
+    width: 200px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+    .book-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    .book-item h3 {
+        font-size: 1.1em;
+        margin: 10px 0;
+    }
+
+    .book-item p {
+        margin: 5px 0;
+        font-size: 0.9em;
+    }
+
+    /* Ẩn các sách không thuộc loại đã chọn */
+    .book-item.hidden {
+        display: none;
+    }
+
+/* Tạo layout flexbox cho banner */
+.banner-container {
+    display: flex;
+    justify-content: space-around; /* Căn đều các banner */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Định dạng cho từng banner */
+.banner {
+    width: 30%; /* Kích thước mỗi banner là 30% chiều rộng của khung chứa */
+    height: 100px;
+    overflow: hidden;
+    border-radius: 8px; /* Tùy chọn làm bo góc banner */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+}
+
+    .banner img {
+        object-fit: cover;
+    }
+
+/* Container chứa toàn bộ các tin tức */
+.news-container {
+    display: flex;
+    justify-content: space-around; /* Căn đều các phần tử */
+    gap: 20px; /* Khoảng cách giữa các phần tử */
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Mỗi tin tức */
+.news-item {
+    position: relative;
+    width: 23%; /* Chiếm 1/4 chiều rộng của container */
+    overflow: hidden;
+    border-radius: 8px; /* Bo góc cho hình ảnh */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+}
+
+    /* Ảnh của mỗi tin tức */
+    .news-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+
+.news-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 25%; 
+    background-color: rgba(0, 0, 0, 0.6); 
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+

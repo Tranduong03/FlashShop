@@ -1,0 +1,86 @@
+﻿@model FlashShop.Models.Paginate
+
+<div class="container">
+    @if (Model.TotalPages > 0) //2 trang
+    {
+        <ul class="pagination justify-content-end">
+
+            @if (Model.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index"
+                       asp-route-pg="1"> &lt;&lt;</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index"
+                       asp-route-pg="@(Model.CurrentPage - 1)"> &lt; </a>
+                </li>
+            }
+            @for (var pge = Model.StartPage; pge <= Model.EndPage; pge++) //1 = 1 <= 2
+            {
+                <li class="page-item @(pge==Model.CurrentPage ? "active" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-pg="@pge">@pge</a>
+                </li>
+
+
+            }
+            @if (Model.CurrentPage < Model.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index"
+                       asp-route-pg="@(Model.CurrentPage+1)"> > </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index"
+                       asp-route-pg="@(Model.TotalPages)"> >> </a>
+                </li>
+            }
+        </ul>
+    }
+</div>
+
+<style>
+    .pagination {
+        font-family: Arial, sans-serif;
+        margin-top: 10px;
+        padding-left: 30px;
+    }
+
+        .pagination .page-item {
+            margin: 0 3px; 
+        }
+
+        .pagination .page-link {
+            color: #28a745;
+            background-color: #f8f9fa;
+            border: 1px solid #28a745;
+            border-radius: 5px; 
+            padding: 6px 10px; 
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+            .pagination .page-link:hover {
+                color: #fff;
+                background-color: #28a745; 
+                border-color: #28a745;
+            }
+
+        .pagination .page-item.active .page-link {
+            background-color: #28a745; 
+            border-color: #28a745;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .pagination .page-item.disabled .page-link {
+            color: #6c757d; 
+            background-color: #e9ecef; 
+            border-color: #dee2e6;
+            cursor: not-allowed;
+        }
+
+        .pagination .page-link:focus {
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25); 
+        }
+</style>

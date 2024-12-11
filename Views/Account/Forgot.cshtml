@@ -1,0 +1,40 @@
+﻿@model AppUserModel
+@{
+    ViewData["Title"] = "Quên mật khẩu";
+}
+
+<div class="col-md-6" style="margin-left: 25%">
+    <h2 class="text-center">Quên mật khẩu</h2>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form asp-action="SendMail" method="post" class="form-container">
+        <div class="form-group">
+            <label class="form-label"> Email </label>
+            <input asp-for="Email" class="form-control" placeholder="Nhập email của bạn" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-default"> Lấy mã </button>
+            <span>
+                <a asp-action="Login" class="link"> Đăng nhập </a>
+                <div>Nếu bạn chưa có tài khoản, hãy đăng kí. <a asp-action="Register" class="link"> TẠI ĐÂY </a></div>
+            </span>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    function togglePasswordVisibility() {
+        var passwordField = document.getElementById("passwordField");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
+    }
+</script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

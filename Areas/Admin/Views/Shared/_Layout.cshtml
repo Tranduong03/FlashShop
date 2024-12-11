@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | Admin</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/FlashShop.styles.css" asp-append-version="true" />
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- Toastify CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <header>
+        <nav class="navbar" id="navbar">
+            <div class="header-container">
+                <div class="logo">
+                    <a href="@Url.Action("Home","Home")" class="text-decoration-none d-flex align-items-center">
+                        <img src="~/images/faviconx3.png" alt="Logo Flash Shop" class="logo-img" style="width:50px; height:50px;" />
+                        <span class="text-uppercase ms-2">Flashshop</span>
+                    </a>
+                </div>
+                <div class="hotline text-center">
+                    <a href="#" class="d-inline-flex align-items-center gap-2 text-decoration-none fw-bold" style="color: red;">
+                        <i class="fas fa-phone-alt"></i>
+                        HOTLINE: 0378730660
+                    </a>
+                </div>
+                <div class="search-bar">
+                    <form class="d-flex">
+                        <input placeholder="  Tìm sản phẩm..." type="text" />
+                        <button>
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="nav-group-icon justify-content-around">
+                    <div class="account">
+                        <a href="@Url.Action("Login", "Account")">
+                            <i class="fa-solid fa-user-large fa-xl"></i>
+                            <p style="color:black;">TÀI KHOẢN</p>
+                        </a>
+                    </div>
+                    <div class="shopping-cart">
+                        <a href="#">
+                            <i class="fa-solid fa-cart-shopping fa-xl"></i>
+                            <p style="color:black;">GIỎ HÀNG</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-container">
+                <ul class="navbar-con">
+                    <li><a href="@Url.Action("Index", "Home", new { area = "" })"> TRANG CHỦ </a></li>
+                    <li class="dropdown">
+                        <a href="#"> SHOP </a>
+                        <div class="dropdown-container">
+                            <ul class="dropdown-menu">
+                                <li><a href="#">AAA</a></li>
+                                <li><a href="#">BBB</a></li>
+                                <li><a href="#">CCC</a></li>
+                                <li><a href="#">DDD</a></li>
+                                <li><a href="#">EEE</a></li>
+                                <li><a href="#">FFF</a></li>
+                            </ul>
+                            <!--
+                                <ul class="dropdown-menu">
+                                <li><a href="#">GGG</a></li>
+                                <li><a href="#">HHH</a></li>
+                                <li><a href="#">III</a></li>
+                                <li><a href="#">JJJ</a></li>
+                                <li><a href="#">KKK</a></li>
+                                <li><a href="#">LLL</a></li>
+                            </ul>
+                            -->
+                        </div>
+                    </li>
+                    <li><a href="@Url.Action("Index", "Order")">ĐƠN HÀNG</a></li>
+                    <li><a href="@Url.Action("Index", "User")">NGƯỜI DÙNG</a></li>
+                    <li><a href="@Url.Action("Index", "Home")">GIỚI THIỆU</a></li>
+                    <li><a href="#">LIÊN HỆ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @await Html.PartialAsync("_NotificationPartialAdmin")
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-bottom">
+            <p><strong>GVHD: Thầy Nguyễn Thiện Dương</strong></p>
+            <p></p>
+            <p>Bài tập lớn Môn Lập Trình Web. Sử dụng ASP.NET Core 8 MVC.</p>
+            <p>Web bán hàng chủ đề bán sách nhiều thể loại tương tự nhà sách</p>
+            <p>Nhóm sinh viên thực hiện</p>
+        </div>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>NHÓM TRƯỞNG</h4>
+                <p><strong>Mã số sinh viên: </strong>6351071014</p>
+                <p><strong>Họ và tên: </strong> Trần Nguyễn Phi Dương</p>
+                <p><strong>Lớp: </strong> Công nghệ thông tin K63</p>
+            </div>
+            <div class="footer-section">
+                <h4>THÀNH VIÊN 1</h4>
+                <p><strong>Mã số sinh viên: </strong>6351071005</p>
+                <p><strong>Họ và tên: </strong> Trần Quân Bảo</p>
+                <p><strong>Lớp: </strong> Công nghệ thông tin K63</p>
+            </div>
+            <div class="footer-section">
+                <h4>THÀNH VIÊN 2</h4>
+                <p><strong>Mã số sinh viên: </strong>6351071054</p>
+                <p><strong>Họ và tên: </strong> Nguyễn Viết Ái Nhi</p>
+                <p><strong>Lớp: </strong> Công nghệ thông tin K63</p>
+            </div>
+            <div class="footer-section">
+                <h4>THÀNH VIÊN 3</h4>
+                <p><strong>Mã số sinh viên: </strong>6351071039</p>
+                <p><strong>Họ và tên: </strong> Phan Tuấn Kiệt</p>
+                <p><strong>Lớp: </strong> Công nghệ thông tin K63</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Toastify JS -->
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
