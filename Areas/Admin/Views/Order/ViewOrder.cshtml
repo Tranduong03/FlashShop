@@ -13,11 +13,13 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Mã đơn hàng</th>
-            <th scope="col">Người đặt</th>
-            <th scope="col">Giá</th>
-            <th scope="col">Số lượng</th>
+            <th scope="col"> ID </th>
+            <th scope="col"> Mã đơn hàng </th>
+            <th scope="col"> Người đặt </th>
+            <th scope="col"> Sách </th>
+            <th scope="col"> Giá </th>
+            <th scope="col"> Số lượng </th>
+            <th scope="col"> Thành tiền </th>
         </tr>
     </thead>
     <tbody>
@@ -33,17 +35,20 @@
                 <td>@item.Book.Title</td>
                 <td>@item.Price</td>
                 <td>@item.Quantity</td>
+                <td>@subtotal</td>
             </tr>
         }
         <tr>
-            <th colspan="5"> Total: </th>
-            <td>@total.ToString("C")</td>
+            <th colspan="1"></th>
+            <th colspan="3"> Total: </th>
             <td>
                 <select class="form-control select-update-order">
                     <option value="1"> Đơn hàng mới </option>
                     <option value="0"> Đã xử lý </option>
                 </select>
             </td>
+            <td></td>
+            <td>@total.ToString("C")</td>
         </tr>
     </tbody>
 </table>
@@ -69,29 +74,35 @@
 
 @section Scripts {
     <script>
-        function showDeleteModal(deleteUrl) {
-            var deleteButton = document.getElementById('deleteButton');
-            deleteButton.setAttribute('href', deleteUrl);
-            var modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
-            modal.show();
-        }
-    </script>
-    <script>
         $(document).ready(function () {
-            $('.select-update-order').change(function () {
+            $('.select-update-order').change(function() {
                 var status = $(this).val();
                 var ordercode = $('.getId').val();
 
                 $.ajax({
                     type: "POST",
                     url: "@Url.Action("UpdateOrder")",
-                    data: {status: status, ordercode: ordercode },
+                    data: { status: status, ordercode: ordercode },
 
-                    success: function (result) {
-
+                    success: function(result) {
+                        if (result.success) {
+                            // console.log("Xử lý đơn hàng thành công");
+                            alert("Xử lý đơn hàng thành công");
+                        } else {
+                            console.log("Xử lý thất bại: " + result.message);
+                            alert("Xử lý thất bại: " + result.message);
+                        }
                     }
-                })
-            }
-        })
+                });
+            });
+        });
+    </script>
+    <script>
+        function showDeleteModal(deleteUrl) {
+            var deleteButton = document.getElementById('deleteButton');
+            deleteButton.setAttribute('href', deleteUrl);
+            var modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+            modal.show();
+        }
     </script>
 }

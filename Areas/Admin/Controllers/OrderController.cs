@@ -42,5 +42,30 @@ namespace FlashShop.Areas.Admin.Controllers
             TempData["successAdmin"] = "Đơn hàng đã được xóa thành công!";
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        [Route("UpdateOrder")]
+        public async Task<IActionResult> UpdateOrder(string ordercode, int status)
+        {
+            var order = await _dataContext.Orders.FirstOrDefaultAsync(o => o.OrderCode == ordercode);
+                
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            order.Status = status;
+
+            try
+            {
+                await _dataContext.SaveChangesAsync();
+                return Ok(new { success = true, message = "Cập nhật trạng thái đơn hàng thành công" });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Có lỗi xảy ra trong khi cập nhật trạng thái đơn hàng");
+            }
+        }
+
     }
 }

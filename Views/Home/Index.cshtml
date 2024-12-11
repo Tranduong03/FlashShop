@@ -110,7 +110,10 @@
                                     <p> Nhà xuất bản: @item.Publisher.PublisherName </p>
                                 -->
                             </a>
-							<a class="btn btn-default add-to-cart" asp-action="Add" asp-controller="Cart" asp-route-id="@item.BookId"><i class="fa fa-shopping-cart"> Giỏ hàng </i></a>
+                            <button class="btn btn-default add-to-cart" data-product_id="@item.BookId" data-title="@item.Title">
+                                <i class="fa fa-shopping-cart"> Giỏ hàng </i>
+                            </button>
+                            <!--<a class="btn btn-default add-to-cart" asp-action="Add" asp-controller="Cart" asp-route-id="@item.BookId"><i class="fa fa-shopping-cart"> Giỏ hàng </i></a>-->
                         </div>
                     </div>
                     <div class="choose">
@@ -125,5 +128,50 @@
     </div>
 </div>
 
-    <partial name="_paging" model="@pager" />
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('.add-to-cart').click(function() {
+                var id = $(this).data("product_id");
+                var title = $(this).data("title");
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Add", "Cart")",
+                    data: { id: id },
+
+                    success: function(result) {
+                        if (result) {
+                            showToast(`Thêm sách [${title}] vào giỏ hàng thành công`, "success");
+                        } else {
+                            showToast(`Không thể thêm sách [${title}] vào giỏ hàng`, "error");
+                        }
+                    },
+                    error: function() {
+                        showToast("Đã xảy ra lỗi khi thêm vào giỏ hàng", "error");
+                    }                      
+                });         
+            });
+        });
+
+        function showToast(message, type) {
+            Swal.fire({
+                toast: true,
+                icon: type,
+                title: message,
+                position: 'top-right',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                showCloseButton: true,
+                customClass: {
+                    popup: type === 'success' ? 'swal-success-toast' : 'swal-error-toast'
+                },
+                closeButtonHtml: '&times;',
+            });
+        }
+    </script>
+}
+
+<partial name="_paging" model="@pager" />
 
