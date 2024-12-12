@@ -52,5 +52,6 @@ namespace FlashShop.Models
         public int PublisherId { get; set; }
         [ForeignKey("PublisherId")]
         public virtual PublisherModel Publisher { get; set; }
+        
     }
 }

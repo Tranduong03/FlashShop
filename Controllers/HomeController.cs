@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using FlashShop.Models;
@@ -25,11 +25,11 @@ namespace FlashShop.Controllers
             return View();
         }
 
-        public IActionResult Index(int pg=1)
+        public IActionResult Index(int pg = 1)
         {
             List<BookModel> products = _dataContext.Books
-                .Include(b => b.Categories) 
-                .Include(b => b.Publisher) 
+                .Include(b => b.Categories)
+                .Include(b => b.Publisher)
                 .ToList();
 
             const int pageSize = 6;
@@ -70,8 +70,8 @@ namespace FlashShop.Controllers
             }
             else
             {
-				return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-			}         
+                return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
         }
 
         //public async Task<IActionResult> Search(string searchTerm)
@@ -118,3 +118,4 @@ namespace FlashShop.Controllers
         }
     }
 }
+

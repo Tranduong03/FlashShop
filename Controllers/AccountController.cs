@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using System.Security.Claims;
 using static System.Net.WebRequestMethods;
 
 
@@ -17,7 +18,7 @@ namespace FlashShop.Controllers
 		private UserManager<AppUserModel> _userManager;
 		private SignInManager<AppUserModel> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-
+	
         // TD write 9/12
         private readonly DataContext _dataContext;
         private readonly IConfiguration _configuration;
@@ -31,6 +32,7 @@ namespace FlashShop.Controllers
 
             _dataContext = context;
             _configuration = configuration;
+
         }
 
 		public IActionResult Login(string returnUrl)
@@ -180,6 +182,42 @@ namespace FlashShop.Controllers
 			await _signInManager.SignOutAsync();
 			return Redirect(returnUrl);
 		}
+		public async Task<IActionResult> CancelOrder(string ordercode)
+		{
+			if ((bool)!User.Identity?.IsAuthenticated)
+			{
+				return RedirectToAction("Login", "Account");
+
+			}
+			try
+			{
+				var order = await _dataContext.Orders.Where(o => o.OrderCode == ordercode).FirstAsync();
+				order.Status = 3;
+				_dataContext.Update(order);
+				await _dataContext.SaveChangesAsync();
+					
+			}
+			catch (Exception ex)
+			{
+				return BadRequest("Có lỗi xảy ra khi hủy đơn hàng");
+			}
+			return RedirectToAction("History", "Account");
+		}
+
+		public async Task<IActionResult>  History()
+		{
+			//if((bool) !User.Identity?.IsAuthenticated)
+			//{
+			//	return RedirectToAction("Login", "Account");
+			//}
+			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+			var userEmail = User.FindFirstValue(ClaimTypes.Email);
+
+			var Oders = await _dataContext.Orders
+				.Where(od => od.UserName == userEmail).OrderByDescending(od => od.Id).ToListAsync();
+			ViewBag.UserEmail = userEmail;
+			return View(Oders);
+		}
 
 		//      private readonly DataContext _context;
 		//      private readonly IConfiguration _configuration;
@@ -191,70 +229,70 @@ namespace FlashShop.Controllers
 		//	_configuration = configuration;
 		//}
 
-        //[HttpGet]
-        //public IActionResult Login()
-        //{
-        //	Console.WriteLine("LoginPage");
-        //	return View(new AccountCheck());
-        //}
+		//[HttpGet]
+		//public IActionResult Login()
+		//{
+		//	Console.WriteLine("LoginPage");
+		//	return View(new AccountCheck());
+		//}
 
-        //[HttpGet]
-        //public IActionResult Register()
-        //{
-        //	return View();
-        //}
+		//[HttpGet]
+		//public IActionResult Register()
+		//{
+		//	return View();
+		//}
 
-        //[HttpGet]
-        //public IActionResult Forgot()
-        //{
-        //	return View();
-        //}
+		//[HttpGet]
+		//public IActionResult Forgot()
+		//{
+		//	return View();
+		//}
 
-        //[HttpGet]
-        //public IActionResult InputOTP()
-        //{
-        //	return View();
-        //}
+		//[HttpGet]
+		//public IActionResult InputOTP()
+		//{
+		//	return View();
+		//}
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Register(Users customer)
-        //{
-        //	if (ModelState.IsValid)
-        //	{
-        //		// Kiểm tra nếu tài khoản đã tồn tại
-        //		var existingAccount = await _context.Users
-        //			.FirstOrDefaultAsync(c => c.account == customer.account);
+		//[HttpPost]
+		//[ValidateAntiForgeryToken]
+		//public async Task<IActionResult> Register(Users customer)
+		//{
+		//	if (ModelState.IsValid)
+		//	{
+		//		// Kiểm tra nếu tài khoản đã tồn tại
+		//		var existingAccount = await _context.Users
+		//			.FirstOrDefaultAsync(c => c.account == customer.account);
 
-        //		if (existingAccount != null)
-        //		{
-        //			TempData["error"] = $"Tài khoản hoặc tên đăng nhập đã tồn tại";
-        //			ModelState.AddModelError("Account", "Account already exists.");
-        //			return View(customer); // Hiển thị lại form với thông báo lỗi
-        //		}
+		//		if (existingAccount != null)
+		//		{
+		//			TempData["error"] = $"Tài khoản hoặc tên đăng nhập đã tồn tại";
+		//			ModelState.AddModelError("Account", "Account already exists.");
+		//			return View(customer); // Hiển thị lại form với thông báo lỗi
+		//		}
 
-        //		// Lưu thông tin người dùng mới vào CSDL
-        //		_context.Users.Add(customer);
-        //		await _context.SaveChangesAsync();
-        //		TempData["success"] = $"Đăng ký tài khoản thành công";
+		//		// Lưu thông tin người dùng mới vào CSDL
+		//		_context.Users.Add(customer);
+		//		await _context.SaveChangesAsync();
+		//		TempData["success"] = $"Đăng ký tài khoản thành công";
 
-        //		// Chuyển hướng tới trang khác sau khi đăng ký thành công
-        //		return RedirectToAction("Login", "Account");
-        //	}
+		//		// Chuyển hướng tới trang khác sau khi đăng ký thành công
+		//		return RedirectToAction("Login", "Account");
+		//	}
 
-        //	// Nếu ModelState không hợp lệ, hiển thị lại form đăng ký
-        //	return View(customer);
-        //}
+		//	// Nếu ModelState không hợp lệ, hiển thị lại form đăng ký
+		//	return View(customer);
+		//}
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Login(AccountCheck checkAcc)
-        //{
-        //	if (ModelState.IsValid)
-        //	{
-        //		// Tìm tài khoản trong cơ sở dữ liệu
-        //		var user = await _context.Users	
-        //			.FirstOrDefaultAsync(c => c.account == checkAcc.account && c.password == checkAcc.password);
+		//[HttpPost]
+		//[ValidateAntiForgeryToken]
+		//public async Task<IActionResult> Login(AccountCheck checkAcc)
+		//{
+		//	if (ModelState.IsValid)
+		//	{
+		//		// Tìm tài khoản trong cơ sở dữ liệu
+		//		var user = await _context.Users	
+		//			.FirstOrDefaultAsync(c => c.account == checkAcc.account && c.password == checkAcc.password);
 
 		//		if (user != null)
 		//		{
@@ -280,9 +318,9 @@ namespace FlashShop.Controllers
 
 		//          Console.WriteLine("LoginValid Fail");
 
-        //	// Nếu ModelState không hợp lệ, hiển thị lại form đăng nhập
-        //	return View(checkAcc);
-        //}
+		//	// Nếu ModelState không hợp lệ, hiển thị lại form đăng nhập
+		//	return View(checkAcc);
+		//}
 
 		//[HttpPost]
 		//[ValidateAntiForgeryToken]
@@ -294,7 +332,7 @@ namespace FlashShop.Controllers
 		//		return View();
 		//	}
 
-        //	var emailvalid = await _context.Users.FirstOrDefaultAsync(c => c.email == email);
+		//	var emailvalid = await _context.Users.FirstOrDefaultAsync(c => c.email == email);
 
 		//	if (emailvalid != null)
 		//          {

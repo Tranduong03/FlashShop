@@ -1,13 +1,17 @@
-﻿@model IEnumerable<OrderModel>
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model IEnumerable<OrderModel>
 
 @{
-    ViewData["Title"] = "Đơn hàng";
+    ViewData["Title"] = "List history Oders placed by" + " " + ViewBag.UserEmail;
 }
 
 @section Styles {
     <link rel="stylesheet" href="~/css/adminSite.css" />
 }
-
+<h3>List History Oders placed by @ViewBag.UserEmail</h3>
 <table class="table">
     <thead>
         <tr>
@@ -45,9 +49,21 @@
 
                 <td>
                     <div class="action-buttons">
-                        <a asp-action="ViewOrder" asp-controller="Order" asp-route-ordercode="@item.OrderCode" class="btn btn-warning btn-sm">
-                            Chi tiết
-                        </a>                      
+                        @if (item.Status != 3)
+                        {
+                             //  <a asp-action="CancelOrder" asp-controller="Account" asp-route-ordercode="@item.OrderCode" class="btn btn-danger btn-sm">
+                             //      Cancel Orders
+                             // </a>
+
+                            <a href="javascript:void(0)"
+                               class="btn btn-danger btn-sm"
+                               onclick="confirmCancelOrder('@Url.Action("CancelOrder", "Account", new { ordercode = item.OrderCode })')">
+                                Cancel Orders
+                            </a>
+
+                        }
+                        
+
                     </div>
                 </td>
                 <td>
@@ -57,7 +73,7 @@
                            onclick="showDeleteModal('@Url.Action("Delete", new { id = item.Id })')">
                             Xóa
                         </a>
-                    </div>              
+                    </div>
                 </td>
             </tr>
         }
@@ -92,4 +108,16 @@
             modal.show();
         }
     </script>
+
+    <script>
+        function confirmCancelOrder(cancelUrl) {
+            // Hiển thị hộp thoại xác nhận
+            if (confirm("Bạn có muốn hủy đơn hàng này không?")) {
+                // Nếu người dùng chọn Yes, điều hướng đến URL hủy đơn hàng
+                window.location.href = cancelUrl;
+            }
+            // Nếu chọn No, không làm gì cả
+        }
+    </script>
+
 }
