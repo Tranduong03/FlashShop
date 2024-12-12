@@ -85,14 +85,34 @@ namespace FlashShop.Controllers
 
         public IActionResult Increase(int id)
         {
+            // Lấy danh sách giỏ hàng từ session
             List<CartItemModel> cart = HttpContext.Session.GetJson<List<CartItemModel>>("Cart");
 
+            // Tìm sách trong giỏ hàng
             CartItemModel cartItem = cart.Where(b => b.BookId == id).FirstOrDefault();
             if (cartItem != null)
             {
-                cartItem.Quantity += 1;
+                // Lấy thông tin sách từ cơ sở dữ liệu
+                var book = await _dataContext.Books.FindAsync(id);
+                if (book != null)
+                {
+                    // Kiểm tra nếu số lượng trong giỏ hàng chưa đạt tới số lượng tồn kho
+                    if (cartItem.Quantity < book.Quantity)
+                    {
+                        cartItem.Quantity += 1;
+                    }
+                    else
+                    {
+                        TempData["error"] = $"Không thể thêm sách '{book.Title}', số lượng tối đa trong kho là {book.Quantity}.";
+                    }
+                }
+                else
+                {
+                    TempData["error"] = "Sách không tồn tại!";
+                }
             }
 
+            // Cập nhật lại session giỏ hàng
             if (cart.Count == 0)
             {
                 HttpContext.Session.Remove("Cart");
@@ -102,9 +122,9 @@ namespace FlashShop.Controllers
                 HttpContext.Session.SetJson("Cart", cart);
             }
 
-
             return RedirectToAction("Index");
         }
+
 
         public async Task<IActionResult> Remove(int id)
         {

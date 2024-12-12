@@ -50,6 +50,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = true;
 });
 
+
 var app = builder.Build();
 
 app.UseStatusCodePagesWithRedirects("/Home/Error?statuscode={0}");
