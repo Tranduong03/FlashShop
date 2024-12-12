@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<OrderDetails>
 
 @{
-    ViewData["Title"] = "Đơn hàng";
+    ViewData["Title"] = "Chi tiết Đơn hàng";
+    decimal total = 0;
+    decimal subtotal = 0;
+    var ordercode = "";
 }
 
 @section Styles {
@@ -11,24 +14,47 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Mã đơn hàng</th>
-            <th scope="col">Người đặt</th>
-            <th scope="col">Giá</th>
-            <th scope="col">Số lượng</th>
+            <th scope="col"> ID </th>
+            <th scope="col"> Mã đơn hàng </th>
+            <th scope="col"> Người đặt </th>
+            <th scope="col"> Sách </th>
+            <th scope="col"> Giá </th>
+            <th scope="col"> Số lượng </th>
+            <th scope="col"> Thành tiền </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
+            subtotal = item.Quantity * item.Price;
+            total += subtotal; 
             <tr>
+                <input type="hidden" asp-for="@item.OrderCode" class="getId" />
                 <th scope="row">@item.Id</th>
                 <td>@item.OrderCode</td>
+                @{
+                    ordercode = @item.OrderCode;
+                }
+                
                 <td>@item.UserName</td>
+                <td>@item.Book.Title</td>
                 <td>@item.Price</td>
                 <td>@item.Quantity</td>
+                <td>@subtotal</td>
             </tr>
         }
+        <tr>
+            <th colspan="1"></th>
+            <th colspan="3"> Total: </th>
+            <td>
+                <select class="form-control select-update-order">
+                    <option value="1"> Đơn hàng mới </option>
+                    <option value="0"> Đã xử lý </option>
+                </select>
+            </td>
+            <td></td>
+            <td>@total.ToString("C")</td>
+        </tr>
     </tbody>
 </table>
 
@@ -51,7 +77,33 @@
     </div>
 </div>
 
+<a asp-controller="Order" asp-action="ExportOrdersToExcel" asp-route-orderCode="@ordercode" >Xuất Excel</a>
+
 @section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.select-update-order').change(function() {
+                var status = $(this).val();
+                var ordercode = $('.getId').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("UpdateOrder")",
+                    data: { status: status, ordercode: ordercode },
+
+                    success: function(result) {
+                        if (result.success) {
+                            // console.log("Xử lý đơn hàng thành công");
+                            alert("Xử lý đơn hàng thành công");
+                        } else {
+                            console.log("Xử lý thất bại: " + result.message);
+                            alert("Xử lý thất bại: " + result.message);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
     <script>
         function showDeleteModal(deleteUrl) {
             var deleteButton = document.getElementById('deleteButton');

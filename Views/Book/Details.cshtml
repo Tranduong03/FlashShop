@@ -61,10 +61,14 @@
                         <span>@Model.BookDetails.Price.ToString("#,##0 Đ")</span>
                         <label>Quantity: @Model.BookDetails.Quantity</label>
                         <input type="text" value="3" />
-                        <button type="button" class="btn btn-fefault cart">
-                            <i class="fa fa-shopping-cart"></i>
-                            Add to cart
-                        </button>
+                        @if (Model.BookDetails.Quantity > 0)
+                        {
+                            <a class="btn btn-default add-to-cart" asp-action="Add" asp-controller="Cart" asp-route-id="@Model.BookDetails.BookId"><i class="fa fa-shopping-cart"> Giỏ hàng </i></a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-default"><i class="fa fa-shopping-cart"> Hết hàng </i></a>
+                        }
                     </span>
                     <p><b>Availability:</b> In Stock</p>
                     <p><b>Condition:</b> New</p>

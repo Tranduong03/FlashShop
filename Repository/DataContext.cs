@@ -21,7 +21,6 @@ namespace FlashShop.Repository
         public DbSet<RatingModel> Ratings { get; set; }
         public DbSet<PublisherModel> Publishers { get; set; }
         public DbSet<OrderModel> Orders { get; set; }
-        public DbSet<OrderDetails> OrdersDetails { get; set; } 
-
+        public DbSet<OrderDetails> OrdersDetails { get; set; }
     }
 }

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/css/adminSite.css" />
 }
 
+
 <table class="table">
     <thead>
         <tr>
@@ -38,3 +39,8 @@
     </tbody>
 </table>
 
+<div class="d-flex justify-content-center">
+    <a asp-action="ExportUsersToExcel" asp-controller="User" class="btn btn-success btn-md mb-3 mt-3">
+        Xuất Excel
+    </a>
+</div>

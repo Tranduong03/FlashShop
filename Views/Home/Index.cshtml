@@ -108,8 +108,15 @@
                                     <p> Nhà xuất bản: @item.Publisher.PublisherName </p>
                                 -->
                             </a>
-							<a class="btn btn-default add-to-cart" asp-action="Add" asp-controller="Cart" asp-route-id="@item.BookId"><i class="fa fa-shopping-cart"> Giỏ hàng </i></a>
-                        </div>
+							@if (item.Quantity > 0)
+							{
+								<a class="btn btn-default add-to-cart" asp-action="Add" asp-controller="Cart" asp-route-id="@item.BookId"><i class="fa fa-shopping-cart"> Giỏ hàng </i></a>
+							}
+							else
+							{
+								<a class="btn btn-default" ><i class="fa fa-shopping-cart"> Hết hàng </i></a>
+							}
+						</div>
                     </div>
                     <div class="choose">
                         <ul class="nav nav-pills nav-justified">
