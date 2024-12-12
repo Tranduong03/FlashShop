@@ -56,8 +56,8 @@ namespace FlashShop.Models
         public RatingModel Ratings { get; set; }
 
         [NotMapped]
-        [Required(ErrorMessage = "Vui lòng nhập số lượng cần thêm.")]
-        [Range(1, int.MaxValue, ErrorMessage = "Số lượng thêm phải lớn hơn 0.")]
+        //[Required(ErrorMessage = "Vui lòng nhập số lượng cần thêm.")]
+        //[Range(1, int.MaxValue, ErrorMessage = "Số lượng thêm phải lớn hơn 0.")]
         public int AddedQuantity { get; set; }
 
     }

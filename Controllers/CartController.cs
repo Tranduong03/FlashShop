@@ -83,7 +83,7 @@ namespace FlashShop.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Increase(int id)
+        public async Task<IActionResult> Increase(int id)
         {
             // Lấy danh sách giỏ hàng từ session
             List<CartItemModel> cart = HttpContext.Session.GetJson<List<CartItemModel>>("Cart");
