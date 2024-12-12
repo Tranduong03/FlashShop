@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
@@ -14,7 +15,7 @@
 	<link href="~/css/responsive.css" rel="stylesheet">
 
 	<!-- SweetAlert2 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 	<!-- Toastify CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
@@ -62,7 +63,8 @@
 			</div>
 		</div><!--/header_top-->
 
-		<div class="header-middle"> <!--header-middle-->
+		<div class="header-middle">
+			<!--header-middle-->
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-4">
@@ -96,11 +98,21 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a asp-controller="Account" asp-action="Login"><i class="fa fa-user"></i> Login </a></li>
-								<li><a href="#"><i class="fa fa-star"></i> Wishlist </a></li>
-								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout </a></li>
+								@if (User.Identity?.IsAuthenticated ?? false)
+								{
+									<li><a asp-controller="Account" asp-action="Logout"><i class="fa fa-sign-out"></i> Hi, @User.Identity.Name </a></li>
+									@if (User.IsInRole("Admin"))
+									{
+										<li><a href="@Url.Action("Index", "Book", new { area = "Admin" })"><i class="fa fa-lock"></i> Admin </a></li>
+									}
+									<li><a href="#"><i class="fa fa-star"></i> Wishlist </a></li>
+									<li><a href="@Url.Action("Index", "Order")"><i class="fa fa-crosshairs"></i> Checkout </a></li>
+								}
+								else
+								{
+									<li><a asp-controller="Account" asp-action="Login"><i class="fa fa-user"></i> Login </a></li>
+								}
 								<li><a href="@Url.Action("Index", "Cart")"><i class="fa fa-shopping-cart"></i> Cart </a></li>
-								<li><a href="@Url.Action("Index", "Book", new {area = "Admin"})"><i class="fa fa-lock"></i> Admin </a></li>
 							</ul>
 						</div>
 					</div>
@@ -108,7 +120,7 @@
 			</div>
 		</div><!--/header-middle-->
 
-		<div class="header-bottom">
+		<div class="header-bottom" style="padding-bottom: 10px;">
 			<!--header-bottom-->
 			<div class="container">
 				<div class="row">
@@ -123,7 +135,7 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="@Url.Action("Index", "Home")" >Home</a></li>
+								<li><a href="@Url.Action("Index", "Home")">Home</a></li>
 								<li class="dropdown">
 									<a href="#">Shop<i class="fa fa-angle-down"></i></a>
 									<ul role="menu" class="sub-menu">
@@ -147,22 +159,27 @@
 						</div>
 					</div>
 					<div class="col-sm-3">
-						<div class="search_box pull-right">
-							<input type="text" placeholder="Search" />
-						</div>
+						<form class="d-flex" asp-controller="Home" asp-action="Search" method="post">
+							<div class="search_box pull-right">
+								<input placeholder="  Tìm sản phẩm..." type="text" name="searchTerm" />
+								<button class="btn btn-warning" type="submit">
+									Search
+								</button>
+							</div>
+						</form>						
 					</div>
 				</div>
 			</div>
 		</div><!--/header-bottom-->
 	</header><!--/header-->
-    
+
 	<section>
-        <div class="container">
-            <div class="row" >
+		<div class="container">
+			<div class="row">
 				@await Html.PartialAsync("_NotificationPartial")
 				@RenderBody()
 			</div>
-        </div>
+		</div>
 	</section>
 
 	<footer id="footer">
@@ -323,9 +340,8 @@
 		</div>
 
 	</footer><!--/Footer-->
-
 	<!-- SweetAlert2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!-- Toastify JS -->
 	<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>

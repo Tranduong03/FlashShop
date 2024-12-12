@@ -28,9 +28,9 @@
                     </a>
                 </div>
                 <div class="search-bar">
-                    <form class="d-flex">
-                        <input placeholder="  Tìm sản phẩm..." type="text" />
-                        <button>
+                    <form class="d-flex" asp-controller="Home" asp-action="Search" method="post">
+                        <input placeholder="  Tìm sản phẩm..." type="text" name="searchTerm"/>
+                        <button class="btn btn-warning" type="submit">  Search
                             <i class="fas fa-search"></i>
                         </button>
                     </form>
@@ -67,7 +67,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a href="#">KHUYẾN MÃI</a></li>
+                    <li><a asp-controller="Order">ĐƠN HÀNG</a></li>
                     <li><a href="#">TIN TỨC</a></li>
                     <li><a href="@Url.Action("Index", "Home")">GIỚI THIỆU</a></li>
                     <li><a href="#">LIÊN HỆ</a></li>

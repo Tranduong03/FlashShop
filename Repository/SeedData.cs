@@ -69,19 +69,19 @@ namespace FlashShop.Repository
             }
 
             // Seed user admin nếu chưa có
-            if (!_context.Users.Any(u => u.userName == "admin"))
-            {
-                Users adminUser = new Users
-                {
-                    userName = "admin",
-                    email = "phiduong.it.hcm@gmail.com",
-                    account = "admin",
-                    password = "admin", // Nên mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
-                    typeUser = true // Quyền admin
-                };
-                _context.Users.Add(adminUser);
-                _context.SaveChanges();
-            }
+            //if (!_context.Users.Any(u => u.userName == "admin"))
+            //{
+            //    Users_Delete adminUser = new Users_Delete
+            //    {
+            //        userName = "admin",
+            //        email = "phiduong.it.hcm@gmail.com",
+            //        account = "admin",
+            //        password = "admin", // Nên mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
+            //        typeUser = true // Quyền admin
+            //    };
+            //    _context.Users.Add(adminUser);
+            //    _context.SaveChanges();
+            //}
         }
     }
 }
