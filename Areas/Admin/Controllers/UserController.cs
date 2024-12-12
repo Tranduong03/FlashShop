@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using System.Drawing;
+using System.IO;
 
 namespace FlashShop.Areas.Admin.Controllers
 {
@@ -119,5 +123,65 @@ namespace FlashShop.Areas.Admin.Controllers
             return View(existingUser);
         }
 
+        [HttpGet]
+        [Route("ExportUsersToExcel")]
+        public async Task<IActionResult> ExportUsersToExcel()
+        {
+            var usersWithRoles = await (from u in _dataContext.Users
+                                        join ur in _dataContext.UserRoles on u.Id equals ur.UserId
+                                        join r in _dataContext.Roles on ur.RoleId equals r.Id
+                                        select new
+                                        {
+                                            u.Id,
+                                            u.UserName,
+                                            u.Email,
+                                            u.PasswordHash,
+                                            RoleName = r.Name
+                                        }).ToListAsync();
+
+            using (var package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Users");
+
+                // Tiêu đề cột
+                worksheet.Cells[1, 1].Value = "ID";
+                worksheet.Cells[1, 2].Value = "Tên người dùng";
+                worksheet.Cells[1, 3].Value = "Email";
+                worksheet.Cells[1, 4].Value = "Mật khẩu băm";
+                worksheet.Cells[1, 5].Value = "Quyền truy cập";
+
+                // Thêm dữ liệu vào Excel
+                int row = 2;
+                foreach (var user in usersWithRoles)
+                {
+                    worksheet.Cells[row, 1].Value = user.Id;
+                    worksheet.Cells[row, 2].Value = user.UserName;
+                    worksheet.Cells[row, 3].Value = user.Email;
+                    worksheet.Cells[row, 4].Value = user.PasswordHash;
+                    worksheet.Cells[row, 5].Value = user.RoleName;
+                    row++;
+                }
+
+                // Định dạng bảng
+                using (var range = worksheet.Cells[1, 1, 1, 5])
+                {
+                    range.Style.Font.Bold = true;
+                    range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    range.Style.Fill.BackgroundColor.SetColor(Color.LightGray);
+                }
+
+                worksheet.Cells.AutoFitColumns();
+
+                // Lưu dữ liệu vào MemoryStream
+                var stream = new MemoryStream();
+                package.SaveAs(stream);
+                stream.Position = 0;
+
+                // Đặt tên file Excel
+                var fileName = "Danh_sach_nguoi_dung_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx";
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+            }
+        }
     }
 }

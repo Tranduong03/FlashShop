@@ -20,6 +20,7 @@
 
 <a asp-action="Create" asp-controller="Book" class="btn btn-primary mb-3 mt-3">Thêm sách mới</a>
 
+
 <table class="table">
     <thead>
         <tr>
@@ -40,9 +41,9 @@
         @foreach (var item in Model)
         {
             <tr>
-                <th scope="row">@item.BookId</th>
+                <td scope="row">@item.BookId</td>
                 <td class="title-column">@item.Title</td>
-                <td>@item.Price</td>
+                <td>@item.Price.ToString("#,##0 Đ")</td>
                 <td class="quantity-column">@item.Quantity</td>
                 <td><img src="~/images/book/@item.ImgLink" width="95" alt="Book Image" /></td>
                 <td class="description-column">
@@ -62,6 +63,9 @@
                            onclick="showDeleteModal('@Url.Action("Delete", new { id = item.BookId })')">
                             Xóa
                         </a>
+                        <a asp-action="AddQuantity" asp-route-id="@item.BookId" class="btn btn-success btn-sm">
+                            Thêm số lượng
+                        </a>
                     </div>
                 </td>
             </tr>
@@ -70,6 +74,12 @@
 </table>
 
 <partial name="_Paging" model="@pager"/>
+
+<div class="d-flex justify-content-center">
+    <a asp-action="ExportToExcel" asp-controller="Book" class="btn btn-success btn-md mb-3 mt-3">
+        Xuất Excel
+    </a>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmLabel" aria-hidden="true">

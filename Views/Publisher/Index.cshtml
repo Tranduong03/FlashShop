@@ -92,6 +92,7 @@
 					<a>
 						<div class="single-products">
 							<div class="productinfo text-center">
+								<a asp-action="Details" asp-controller="Book" asp-route-id="@item.BookId">
 								<img src="~/images/book/@item.ImgLink" />
 								<h2>$@item.Price</h2>
 								<p>@item.Title</p>
@@ -99,6 +100,7 @@
 									<p> Danh mục: @item.Categories.CategoryName </p>
 									<p> Nhà xuất bản: @item.Publisher.PublisherName </p>
 								-->
+								</a>
 								<a class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"> Giỏ hàng </i></a>
 							</div>
 						</div>

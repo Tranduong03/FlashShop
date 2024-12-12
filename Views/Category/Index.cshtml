@@ -92,13 +92,15 @@
 					<a>
 						<div class="single-products">
 							<div class="productinfo text-center">
+								<a asp-action="Details" asp-controller="Book" asp-route-id="@item.BookId">
 								<img src="~/images/book/@item.ImgLink" />
-								<h2>$@item.Price</h2>
+								<h2>@item.Price.ToString("#,##0 Đ")</h2>
 								<p>@item.Title</p>
 								<!--
 									<p> Danh mục: @item.Categories.CategoryName </p>
 									<p> Nhà xuất bản: @item.Publisher.PublisherName </p>
 								-->
+								</a>
 								<a class="btn btn-default add-to-cart" asp-action="Add" asp-controller="Cart" asp-route-id="@item.BookId"><i class="fa fa-shopping-cart"> Giỏ hàng </i></a>
 							</div>
 						</div>
