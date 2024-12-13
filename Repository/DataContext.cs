@@ -20,7 +20,7 @@ namespace FlashShop.Repository
         public DbSet<BookModel> Books { get; set; }
         public DbSet<PublisherModel> Publishers { get; set; }
         public DbSet<OrderModel> Orders { get; set; }
-        public DbSet<OrderDetails> OrdersDetails { get; set; } 
-
-    }
+        public DbSet<OrderDetails> OrdersDetails { get; set; }
+		public DbSet<UserDetail> UserDetails { get; set; }
+	}
 }

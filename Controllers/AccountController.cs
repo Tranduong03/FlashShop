@@ -2,6 +2,7 @@
 using FlashShop.Models.ViewModels;
 using FlashShop.OtherProcessing;
 using FlashShop.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -222,8 +223,70 @@ namespace FlashShop.Controllers
             return View(Oders);
         }
 
+		[HttpGet]
+		[Authorize]
+		public async Task<IActionResult> EditProfile()
+		{
+			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Lấy ID người dùng hiện tại
+			var userDetails = await _dataContext.UserDetails.FirstOrDefaultAsync(u => u.UserId == userId);
+			var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
+			if (userDetails == null)
+			{
+				userDetails = new UserDetail
+				{
+					UserId = userId
+				};
+				_dataContext.UserDetails.Add(userDetails);
+				await _dataContext.SaveChangesAsync();
+			}
 
+			var viewModel = new EditProfileViewModel
+			{
+				UserName = user.UserName,
+				Email = user.Email,
+				FullName = userDetails.FullName,
+				PhoneNumber = userDetails.PhoneNumber,
+				Address = userDetails.Address
+			};
 
-    }
+			return View(viewModel);
+		}
+
+		[HttpPost]
+		[Authorize]
+		public async Task<IActionResult> EditProfile(EditProfileViewModel model)
+		{
+			if (!ModelState.IsValid) return View(model);
+
+			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+			var userDetails = await _dataContext.UserDetails.FirstOrDefaultAsync(u => u.UserId == userId);
+
+			if (userDetails == null)
+			{
+				// Nếu thông tin chưa tồn tại, thêm mới
+				userDetails = new UserDetail
+				{
+					UserId = userId,
+					FullName = model.FullName,
+					PhoneNumber = model.PhoneNumber,
+					Address = model.Address
+				};
+				_dataContext.UserDetails.Add(userDetails);
+			}
+			else
+			{
+				// Nếu thông tin đã tồn tại, cập nhật
+				userDetails.FullName = model.FullName;
+				userDetails.PhoneNumber = model.PhoneNumber;
+				userDetails.Address = model.Address;
+				_dataContext.UserDetails.Update(userDetails);
+			}
+
+			await _dataContext.SaveChangesAsync();
+			TempData["success"] = "Cập nhật thông tin thành công.";
+			return RedirectToAction("EditProfile");
+		}
+
+	}
 }
