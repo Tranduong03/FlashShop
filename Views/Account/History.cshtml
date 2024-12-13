@@ -39,7 +39,11 @@
                     {
                         <span class="text text-primary"> Đã xử lý </span>
                     }
-                    else
+                    else if (item.Status == 2)
+                    {
+                        <span class="text text-danger"> Đã bị từ chối</span>
+                    }
+                    else 
                     {
                         <span class="text text-danger"> Đã hủy</span>
                     }
