@@ -138,6 +138,7 @@ namespace FlashShop.Areas.Admin.Controllers
             }
 
             order.Status = status;
+            ViewBag.Status = order.Status;
 
             try
             {

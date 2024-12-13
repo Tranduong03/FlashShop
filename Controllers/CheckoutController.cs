@@ -78,7 +78,7 @@ namespace FlashShop.Controllers
 				// Xóa giỏ hàng trong session
 				HttpContext.Session.Remove("Cart");
 				TempData["success"] = "Checkout thành công, vui lòng chờ duyệt đơn hàng";
-				return RedirectToAction("Index", "Cart");
+				return RedirectToAction("History", "Account");
 			}
 		}
 
