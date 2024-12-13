@@ -1,0 +1,92 @@
+﻿@using FlashShop.Models.ViewModels
+@model CartItemViewModel
+
+@{
+	ViewData["Title"] = "Thông tin đặt hàng";
+	Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+@section Styles {
+	<link rel="stylesheet" href="~/css/styles.css" />
+	<link href="~/css/main.css" rel="stylesheet" />
+}
+
+<h2>Giỏ hàng</h2>
+
+<section id="cart_items">
+	<div class="container">
+		<div class="breadcrumbs">
+			<ol class="breadcrumb">
+				<li><a href="@Url.Action("Index", "Home")">Home</a></li>
+				<li class="active">Shopping Cart</li>
+			</ol>
+		</div>
+		<div class="table-responsive cart_info">
+			<table class="table table-condensed">
+				<thead>
+					<tr class="cart_menu">
+						<td class="image">Item</td>
+						<td class="description"></td>
+						<td class="price">Price</td>
+						<td class="quantity">Quantity</td>
+						<td class="total">Total</td>
+						<td><a class="btn btn-danger btn-sm" style="font-size: 16px;" asp-controller="Cart" asp-action="Clear"> Clear All </a></td>
+					</tr>
+				</thead>
+				<tbody>
+					@if (Model.CartItems.Count > 0)
+					{
+						@foreach (var item in Model.CartItems)
+						{
+							<tr>
+								<td class="cart_product">
+									<a href=""><img src="~/images/book/@item.Image" width="170" alt=""></a>
+								</td>
+								<td class="cart_description">
+									<h4><a href="">@item.Title</a></h4>
+									<p>Book ID: @item.BookId</p>
+								</td>
+								<td class="cart_price">
+									<p>@item.Price.ToString("#,##0 Đ")</p>
+								</td>
+								<td class="cart_quantity">
+									<div style="display: flex; align-items: center; gap: 10px;">
+										<a class="btn btn-default btn-sm" asp-controller="Cart" asp-action="Decrease" asp-route-id="@item.BookId"> - </a>
+										<input class="cart_quantity_input" type="text" name="quantity" value="@item.Quantity" autocomplete="off" size="2">
+										<a class="btn btn-default btn-sm" asp-controller="Cart" asp-action="Increase" asp-route-id="@item.BookId"> + </a>
+									</div>
+								</td>
+
+
+								<td class="cart_total">
+									<p class="cart_total_price">@Model.CartItems.Where(x => x.BookId == @item.BookId).Sum(x => x.Quantity * x.Price).ToString()</p>
+								</td>
+								<td class="cart_delete">
+									<a class="cart_quantity_delete" asp-controller="Cart" asp-action="Remove" asp-route-id="@item.BookId"><i class="fa fa-times"></i></a>
+								</td>
+							</tr>
+						}
+						<tr style="height: 40px;">
+							<td colspan="1"></td>
+							<td colspan="2" style="vertical-align: middle; text-align: left; padding: 1px; margin: 0;">
+								<p style="margin: 0; line-height: 1.2;"><b style="font-size: 25px">Tổng tiền:</b></p>
+							</td>
+							<td colspan="2" style="vertical-align: middle; text-align: right; padding-right: 65px; margin: 0;">
+								<p class="cart_total_price" style="margin: 0; font-size: 25px">@Model.GrandTotal.ToString()</p>
+							</td>
+							@if (User.Identity?.IsAuthenticated ?? false)
+							{
+								<td> <a class="btn btn-success btn-sm" style="font-size: 16px;" asp-controller="Checkout" asp-action="Checkout"> Thanh toán </a> </td>
+							}
+							else
+							{
+								<td> <a class="btn btn-success btn-sm" style="font-size: 16px;" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Context.Request.Path"> Thanh toán </a> </td>
+							}
+						</tr>
+					}
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>
